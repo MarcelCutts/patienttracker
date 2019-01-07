@@ -2,7 +2,7 @@ import * as React from "react";
 import { Platform, StatusBar, StyleSheet, View } from "react-native";
 import { AppLoading, Asset, Font, Icon } from "expo";
 import AppNavigator from "./navigation/AppNavigator";
-import i18n from "./i18n";
+import i18n from "./i18n"; // eslint-disable-line
 import { withNamespaces } from "react-i18next";
 
 const WrappedStack = ({ t }) => <AppNavigator screenProps={{ t }} />;
@@ -13,7 +13,8 @@ const ReloadAppOnLanguageChange = withNamespaces("common", {
 
 export default class App extends React.Component {
   state = {
-    isLoadingComplete: false
+    isLoadingComplete: false,
+    currentUser: {}
   };
 
   render() {

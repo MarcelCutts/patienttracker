@@ -79,3 +79,5 @@ i18n
       escapeValue: false // not needed for react as it does escape per default to prevent xss!
     }
   });
+
+export default i18n;
