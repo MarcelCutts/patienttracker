@@ -25,6 +25,13 @@ i18n
 
     resources: {
       en: {
+        signIn: {
+          title: "Please sign in",
+          signIn: "Sign in",
+          name: "Name",
+          stationId: "Station ID",
+          facilityId: "Facility ID"
+        },
         home: {
           title: "Welcome",
           introduction:
@@ -46,6 +53,13 @@ i18n
         }
       },
       ht: {
+        signIn: {
+          title: "Tanpri, antre detay yo.", // This is "Please enter your details" so needs more work
+          signIn: "Sove", // Technically "save"
+          name: "itilizatè",
+          stationId: "id estasyon",
+          facilityId: "id klinik"
+        },
         home: {
           title: "Willkommen",
           introduction: "Dieser Text ist von i18next und ist in deutsch."
