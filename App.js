@@ -4,6 +4,7 @@ import { AppLoading, Asset, Font, Icon } from "expo";
 import AppNavigator from "./navigation/AppNavigator";
 import i18n from "./i18n"; // eslint-disable-line
 import { withNamespaces } from "react-i18next";
+import { Provider as PaperProvider } from "react-native-paper";
 
 const WrappedStack = ({ t }) => <AppNavigator screenProps={{ t }} />;
 const ReloadAppOnLanguageChange = withNamespaces("common", {
@@ -28,10 +29,12 @@ export default class App extends React.Component {
       );
     } else {
       return (
-        <View style={styles.container}>
-          {Platform.OS === "ios" && <StatusBar barStyle="default" />}
-          <ReloadAppOnLanguageChange />
-        </View>
+        <PaperProvider>
+          <View style={styles.container}>
+            {Platform.OS === "ios" && <StatusBar barStyle="default" />}
+            <ReloadAppOnLanguageChange />
+          </View>
+        </PaperProvider>
       );
     }
   }
@@ -47,7 +50,8 @@ export default class App extends React.Component {
         ...Icon.Ionicons.font,
         // We include SpaceMono because we use it in HomeScreen.js. Feel free
         // to remove this if you are not using it in your app
-        "space-mono": require("./assets/fonts/SpaceMono-Regular.ttf")
+        "space-mono": require("./assets/fonts/SpaceMono-Regular.ttf"),
+        MaterialIcons: require("@expo/vector-icons/fonts/MaterialIcons.ttf")
       })
     ]);
   };

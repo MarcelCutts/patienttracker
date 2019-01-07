@@ -1,11 +1,7 @@
 import * as React from "react";
-import {
-  Button,
-  StyleSheet,
-  AsyncStorage,
-  TextInput,
-  View
-} from "react-native";
+import { StyleSheet, AsyncStorage, View } from "react-native";
+import { TextInput, Button } from "react-native-paper";
+import { createStackNavigator } from "react-navigation";
 import { LanguageSelector } from "../components/LanguageSelector";
 
 export class UserSignInScreen extends React.Component {
@@ -41,48 +37,52 @@ export class UserSignInScreen extends React.Component {
     return (
       <View style={styles.container}>
         <TextInput
+          mode="outlined"
           style={styles.input}
-          editable={true}
+          label="Name"
           onChangeText={text => this.setState({ name: text })}
           value={this.state.name}
-          placeholder="Name"
         />
         <TextInput
+          mode="outlined"
           style={styles.input}
-          editable={true}
+          label="Station ID"
           onChangeText={text => this.setState({ stationId: text })}
           value={this.state.stationId}
-          placeholder="Station ID"
         />
         <TextInput
+          mode="outlined"
           style={styles.input}
-          editable={true}
+          label="Facility ID"
           onChangeText={text => this.setState({ faciliyId: text })}
           value={this.state.faciliyId}
-          placeholder="Facility ID"
         />
-        <Button style={styles.button} title="Sign in" onPress={this.signIn} />
+        <Button
+          icon="portrait"
+          mode="contained"
+          onPress={() => console.log("Pressed")}
+        >
+          Sign in
+        </Button>
       </View>
     );
   }
 }
 
+export const UserSignInStack = createStackNavigator({
+  UserSignIn: UserSignInScreen
+});
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    fontSize: 18,
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center"
   },
   input: {
-    fontSize: 24,
-    width: "90%",
-    marginTop: 10,
-    marginBottom: 10
-  },
-  button: {
-    fontSize: 28,
-    height: 44
+    width: "70%",
+    marginBottom: 16,
+    fontSize: 18
   }
 });

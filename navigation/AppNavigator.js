@@ -1,8 +1,8 @@
-import { createSwitchNavigator } from "react-navigation";
+import { createSwitchNavigator, createStackNavigator } from "react-navigation";
 
 import MainTabNavigator from "./MainTabNavigator";
 import { UserLoadingScreen } from "../screens/UserLoadingScreen";
-import { UserSignInScreen } from "../screens/UserSignInScreen";
+import { UserSignInStack } from "../screens/UserSignInScreen";
 
 export default createSwitchNavigator(
   {
@@ -10,7 +10,7 @@ export default createSwitchNavigator(
     // Read more at https://reactnavigation.org/docs/en/auth-flow.html
     Main: MainTabNavigator,
     UserLoading: UserLoadingScreen,
-    UserSignIn: UserSignInScreen
+    UserSignIn: UserSignInStack
   },
   { initialRouteName: "UserLoading" }
 );
