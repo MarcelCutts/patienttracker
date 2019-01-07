@@ -3,7 +3,7 @@ import { Platform, StatusBar, StyleSheet, View } from "react-native";
 import { AppLoading, Asset, Font, Icon } from "expo";
 import AppNavigator from "./navigation/AppNavigator";
 import i18n from "./i18n";
-import { I18nextProvider, withNamespaces } from "react-i18next";
+import { withNamespaces } from "react-i18next";
 
 const WrappedStack = ({ t }) => <AppNavigator screenProps={{ t }} />;
 const ReloadAppOnLanguageChange = withNamespaces("common", {

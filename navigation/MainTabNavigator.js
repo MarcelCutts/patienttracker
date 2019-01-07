@@ -10,15 +10,15 @@ import HomeScreen from "../screens/HomeScreen";
 import QrScreen from "../screens/QrScreen";
 import LinksScreen from "../screens/LinksScreen";
 import SettingsScreen from "../screens/SettingsScreen";
-import i18n from "../i18n";
-import { I18nextProvider, withNamespaces } from "react-i18next";
 
 const HomeStack = createStackNavigator(
   {
     Home: HomeScreen,
     Qr: QrScreen
   },
-  { initialRouteName: "Home" }
+  {
+    initialRouteName: "Home"
+  }
 );
 
 HomeStack.navigationOptions = {

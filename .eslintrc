@@ -1,19 +1,20 @@
 {
-  "plugins": ["react", "react-native"],
+  "plugins": ["react", "react-native", "flowtype"],
+  "parser": "babel-eslint",
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
-    },
-    "sourceType": "module"
+    }
   },
   "env": {
     "react-native/react-native": true
   },
+  "extends": ["eslint:recommended", "plugin:react/recommended"],
   "rules": {
     "react-native/no-unused-styles": 2,
     "react-native/split-platform-components": 2,
     "react-native/no-inline-styles": 2,
-    "react-native/no-color-literals": 2,
-    "react-native/no-raw-text": 2
+    "react/prop-types": 0,
+    "react/display-name": 0
   }
 }

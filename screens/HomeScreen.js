@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import {
   Image,
   Platform,
@@ -11,22 +11,16 @@ import {
 } from "react-native";
 import { WebBrowser } from "expo";
 import { Icon } from "expo";
-import { Localization } from "expo-localization";
 import { MonoText } from "../components/StyledText";
 import { withNamespaces } from "react-i18next";
-
-const en = {
-  changeText: "Change this text and your app will automatically reload."
-};
-
-const fr = {
-  changeText:
-    "Changez ce texte et votre application se rechargera automatiquement."
-};
-
-const message = "hello";
+import { LanguageSelector } from "../components/LanguageSelector";
 
 class HomeScreen extends React.Component {
+  static navigationOptions = {
+    title: "Patient Tracker",
+    headerRight: <LanguageSelector />
+  };
+
   render() {
     const { t, i18n, navigation } = this.props;
     return (

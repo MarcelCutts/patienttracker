@@ -1,3 +1,4 @@
+// @flow
 import i18n from "i18next";
 import { reactI18nextModule } from "react-i18next";
 import { Localization } from "expo-localization";
@@ -44,7 +45,7 @@ i18n
             "<0><0>Eins </O><1>Zwei </1><2>Drei </2><3>Vier </3><4>Fünf</4></O>"
         }
       },
-      de: {
+      ht: {
         home: {
           title: "Willkommen",
           introduction: "Dieser Text ist von i18next und ist in deutsch."
