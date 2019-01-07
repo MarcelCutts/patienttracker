@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, Picker } from "react-native";
+import { StyleSheet, Picker } from "react-native";
 import { withNamespaces } from "react-i18next";
 
 export const LanguageDropdown = ({ i18n }) => (
