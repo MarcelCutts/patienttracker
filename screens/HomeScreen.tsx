@@ -1,10 +1,15 @@
 import * as React from "react";
+import { NavigationScreenProp } from "react-navigation";
 import { StyleSheet, View } from "react-native";
-import { withNamespaces } from "react-i18next";
+import { withNamespaces, WithNamespaces } from "react-i18next";
 import { FAB } from "react-native-paper";
 import { LanguageSelector } from "../components/LanguageSelector";
 
-class HomeScreen extends React.Component {
+interface Props {
+  navigation: NavigationScreenProp<any, any>;
+}
+
+class HomeScreen extends React.Component<Props & WithNamespaces> {
   static navigationOptions = {
     title: "Patient Tracker",
     headerRight: <LanguageSelector />

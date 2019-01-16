@@ -1,6 +1,5 @@
 import React from "react";
-import { ScrollView, StyleSheet, FlatList, View, Text } from "react-native";
-import { ExpoLinksView } from "@expo/samples";
+import { StyleSheet, FlatList, View, Text } from "react-native";
 
 let data = [];
 for (let i = 0; i < 20; i++) {

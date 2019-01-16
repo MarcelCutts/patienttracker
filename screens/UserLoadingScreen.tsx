@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import {
   ActivityIndicator,
   AsyncStorage,
@@ -6,9 +6,14 @@ import {
   StyleSheet,
   View
 } from "react-native";
+import { NavigationScreenProp } from "react-navigation";
 
-export class UserLoadingScreen extends React.Component {
-  constructor(props) {
+interface Props {
+  navigation: NavigationScreenProp<any, any>;
+}
+
+export class UserLoadingScreen extends React.Component<Props> {
+  constructor(props: Props) {
     super(props);
     this.bootstrapAsync();
   }

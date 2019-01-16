@@ -1,9 +1,6 @@
 import React from "react";
 import { Platform } from "react-native";
-import {
-  createStackNavigator,
-  createBottomTabNavigator
-} from "react-navigation";
+import * as rn from "react-navigation";
 
 import TabBarIcon from "../components/TabBarIcon";
 import HomeScreen from "../screens/HomeScreen";
@@ -11,7 +8,7 @@ import QrScreen from "../screens/QrScreen";
 import LinksScreen from "../screens/LinksScreen";
 import SettingsScreen from "../screens/SettingsScreen";
 
-const HomeStack = createStackNavigator(
+const HomeStack = rn.createStackNavigator(
   {
     Home: HomeScreen,
     Qr: QrScreen
@@ -35,7 +32,7 @@ HomeStack.navigationOptions = {
   )
 };
 
-const LinksStack = createStackNavigator({
+const LinksStack = rn.createStackNavigator({
   Links: LinksScreen
 });
 
@@ -49,7 +46,7 @@ LinksStack.navigationOptions = {
   )
 };
 
-const SettingsStack = createStackNavigator({
+const SettingsStack = rn.createStackNavigator({
   Settings: SettingsScreen
 });
 
@@ -63,7 +60,7 @@ SettingsStack.navigationOptions = {
   )
 };
 
-export default createBottomTabNavigator({
+export default rn.createBottomTabNavigator({
   HomeStack,
   LinksStack,
   SettingsStack

@@ -1,4 +1,4 @@
-import { createSwitchNavigator, createStackNavigator } from "react-navigation";
+import { createSwitchNavigator } from "react-navigation";
 
 import MainTabNavigator from "./MainTabNavigator";
 import { UserLoadingScreen } from "../screens/UserLoadingScreen";

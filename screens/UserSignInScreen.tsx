@@ -1,17 +1,29 @@
 import * as React from "react";
 import { StyleSheet, AsyncStorage, View } from "react-native";
 import { TextInput, Button } from "react-native-paper";
-import { createStackNavigator } from "react-navigation";
+import { createStackNavigator, NavigationScreenProp } from "react-navigation";
 import { withNamespaces } from "react-i18next";
+import i18n from "i18next";
 import { LanguageSelector } from "../components/LanguageSelector";
 
-export class UserSignInScreen extends React.Component {
-  constructor(props) {
+interface Props {
+  navigation: NavigationScreenProp<any, any>;
+  t: i18n.TranslationFunction;
+}
+
+interface State {
+  name: string;
+  stationId: string;
+  facilityId: string;
+}
+
+export class UserSignInScreen extends React.Component<Props, State> {
+  constructor(props: Props) {
     super(props);
     this.state = {
       name: "",
       stationId: "",
-      faciliyId: ""
+      facilityId: ""
     };
   }
 
@@ -55,8 +67,8 @@ export class UserSignInScreen extends React.Component {
           mode="outlined"
           style={styles.input}
           label={t("signIn:facilityId")}
-          onChangeText={text => this.setState({ faciliyId: text })}
-          value={this.state.faciliyId}
+          onChangeText={text => this.setState({ facilityId: text })}
+          value={this.state.facilityId}
         />
         <Button
           icon="portrait"

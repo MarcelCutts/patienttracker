@@ -1,18 +1,29 @@
 import * as React from "react";
 import { Platform, StatusBar, StyleSheet, View } from "react-native";
-import { AppLoading, Asset, Font, Icon } from "expo";
+import { AppLoading, Asset, Font } from "expo";
+import { Ionicons } from "@expo/vector-icons";
 import AppNavigator from "./navigation/AppNavigator";
-import i18n from "./i18n"; // eslint-disable-line
-import { withNamespaces } from "react-i18next";
+import { withNamespaces, I18nextProvider } from "react-i18next";
 import { Provider as PaperProvider } from "react-native-paper";
+import i18n from "./i18n";
 
 const WrappedStack = ({ t }) => <AppNavigator screenProps={{ t }} />;
 const ReloadAppOnLanguageChange = withNamespaces("common", {
   bindI18n: "languageChanged",
-  bindStore: false
+  bindStore: false,
+  wait: true
 })(WrappedStack);
 
-export default class App extends React.Component {
+interface Props {
+  skipLoadingScreen: boolean;
+}
+
+interface State {
+  isLoadingComplete: boolean;
+  currentUser: Object;
+}
+
+export default class App extends React.Component<Props, State> {
   state = {
     isLoadingComplete: false,
     currentUser: {}
@@ -29,12 +40,14 @@ export default class App extends React.Component {
       );
     } else {
       return (
-        <PaperProvider>
-          <View style={styles.container}>
-            {Platform.OS === "ios" && <StatusBar barStyle="default" />}
-            <ReloadAppOnLanguageChange />
-          </View>
-        </PaperProvider>
+        <I18nextProvider i18n={i18n}>
+          <PaperProvider>
+            <View style={styles.container}>
+              {Platform.OS === "ios" && <StatusBar barStyle="default" />}
+              <ReloadAppOnLanguageChange />
+            </View>
+          </PaperProvider>
+        </I18nextProvider>
       );
     }
   }
@@ -47,19 +60,23 @@ export default class App extends React.Component {
       ]),
       Font.loadAsync({
         // This is the font that we are using for our tab bar
-        ...Icon.Ionicons.font,
+        ...Ionicons.font,
         // We include SpaceMono because we use it in HomeScreen.js. Feel free
         // to remove this if you are not using it in your app
         "space-mono": require("./assets/fonts/SpaceMono-Regular.ttf"),
         MaterialIcons: require("@expo/vector-icons/fonts/MaterialIcons.ttf")
-      })
+      }),
+      Asset.loadAsync([
+        require("./assets/images/robot-dev.png"),
+        require("./assets/images/robot-prod.png")
+      ])
     ]);
   };
 
   _handleLoadingError = error => {
     // In this case, you might want to report the error to your error
     // reporting service, for example Sentry
-    console.warn(error);
+    console.warn(error); // eslint-disable-line
   };
 
   _handleFinishLoading = () => {
