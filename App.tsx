@@ -7,7 +7,11 @@ import { withNamespaces, I18nextProvider } from "react-i18next";
 import { Provider as PaperProvider } from "react-native-paper";
 import i18n from "./i18n";
 
-const WrappedStack = ({ t }) => <AppNavigator screenProps={{ t }} />;
+const navigationPersistenceKey = __DEV__ ? "NavigationStateDEV" : null;
+const WrappedStack = ({ t }) => (
+  <AppNavigator persistenceKey={navigationPersistenceKey} screenProps={{ t }} />
+);
+
 const ReloadAppOnLanguageChange = withNamespaces("common", {
   bindI18n: "languageChanged",
   bindStore: false,

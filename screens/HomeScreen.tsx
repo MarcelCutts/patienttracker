@@ -4,6 +4,7 @@ import { StyleSheet, View } from "react-native";
 import { withNamespaces, WithNamespaces } from "react-i18next";
 import { FAB } from "react-native-paper";
 import { LanguageSelector } from "../components/LanguageSelector";
+import { UserCard } from "../components/UserCard";
 
 interface Props {
   navigation: NavigationScreenProp<any, any>;
@@ -19,6 +20,9 @@ class HomeScreen extends React.Component<Props & WithNamespaces> {
     const { navigation } = this.props;
     return (
       <View style={styles.container}>
+        <View style={styles.user}>
+          <UserCard />
+        </View>
         <FAB
           style={styles.fab}
           icon="camera-alt"
@@ -35,6 +39,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff"
+  },
+  user: {
+    margin: 16
   },
   fab: {
     position: "absolute",
