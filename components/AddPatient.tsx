@@ -1,76 +1,82 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, AsyncStorage } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { Button, Dialog, Paragraph, TextInput } from "react-native-paper";
+import {
+  Button,
+  Dialog,
+  Paragraph,
+  TextInput,
+  Divider
+} from "react-native-paper";
+import { Patient } from "../types";
 
 type Props = {
   visible: boolean;
-  token: { type: string; data: string };
+  token: string;
   hideDialog: () => void;
-  isManual: boolean;
   navigate: (destingation: string) => void;
 };
 
 type State = {
-  patientId: string;
   comments: string;
 };
 
 export class AddPatient extends React.Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      patientId: "",
-      comments: ""
-    };
-  }
+  state = {
+    comments: ""
+  };
 
   render() {
-    const { visible, token, hideDialog, isManual = false } = this.props;
+    const { visible, token, hideDialog } = this.props;
     return (
       <Dialog visible={visible} onDismiss={hideDialog}>
         <Dialog.Title>Add patient to queue?</Dialog.Title>
         <Dialog.Content>
           <View style={styles.container}>
             <MaterialCommunityIcons name="qrcode" size={80} />
-            {isManual ? (
-              <TextInput
-                style={styles.manualInput}
-                mode="outlined"
-                label="Patient ID"
-                onChangeText={text => this.setState({ patientId: text })}
-                value=""
-              />
-            ) : (
-              <Paragraph>{token && token.data}</Paragraph>
-            )}
+            <Paragraph>{token}</Paragraph>
           </View>
 
           <TextInput
             mode="outlined"
             label="Comments"
             onChangeText={text => this.setState({ comments: text })}
-            value=""
+            value={this.state.comments}
           />
         </Dialog.Content>
+        <Divider />
         <Dialog.Actions>
           <Button onPress={hideDialog}>Cancel</Button>
-          <Button onPress={this.handlePatientAdd}>Add to queue</Button>
+          <Button onPress={this.addPatient} mode="contained">
+            Add to queue
+          </Button>
         </Dialog.Actions>
       </Dialog>
     );
   }
 
-  handlePatientAdd = () => {
-    const patientId =
-      (this.props.token && this.props.token.data) || this.state.patientId;
+  addPatient = async () => {
+    const patientId = this.props.token;
     const comments = this.state.comments;
+    const user = JSON.parse(await AsyncStorage.getItem("user"));
+    const entry: Patient = {
+      staffName: user.name,
+      facilityId: user.facilityId,
+      stationId: user.stationId,
+      timeStarted: Date.now(),
+      id: patientId,
+      comments
+    };
+
+    await AsyncStorage.setItem(`Patient-${patientId}`, JSON.stringify(entry));
     this.props.navigate("Home");
-    // return { patientId, comments };
   };
 }
 
 const styles = StyleSheet.create({
   container: { flexDirection: "row", marginBottom: 8 },
-  manualInput: { flex: 1 }
+  manualInput: { flex: 1 },
+  actions: {
+    justifyContent: "space-between"
+  }
 });
