@@ -21,12 +21,9 @@ interface State {
 }
 
 class HomeScreen extends React.Component<Props & WithNamespaces, State> {
-  constructor(props) {
-    super(props);
-    this.state = {
-      user: null
-    };
-  }
+  state = {
+    user: null
+  };
 
   static navigationOptions = {
     title: "Patient Tracker",

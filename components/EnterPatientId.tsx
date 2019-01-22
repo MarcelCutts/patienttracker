@@ -30,11 +30,11 @@ export class EnterPatientId extends React.Component<Props, State> {
     const { patientId } = this.state;
     return (
       <Dialog visible={visible} onDismiss={hideDialog}>
-        <Dialog.Title>Add patient to queue?</Dialog.Title>
+        <Dialog.Title>Enter Patient ID?</Dialog.Title>
         <Dialog.Content>
           <TextInput
             mode="outlined"
-            label="PatientID"
+            label="Patient ID"
             onChangeText={text => this.setState({ patientId: text })}
             value={patientId}
           />
