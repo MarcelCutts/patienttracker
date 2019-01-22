@@ -1,6 +1,5 @@
 import React from "react";
-import { View, StyleSheet, AsyncStorage } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { StyleSheet } from "react-native";
 import {
   Button,
   Dialog,
@@ -8,7 +7,6 @@ import {
   TextInput,
   Divider
 } from "react-native-paper";
-import { Patient } from "../types";
 
 type Props = {
   visible: boolean;

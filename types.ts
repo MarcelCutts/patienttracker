@@ -14,6 +14,7 @@ export interface Patient {
   timeEnded?: number;
 }
 
-export type State = {
+export type Store = {
   readonly patients: ReadonlyArray<Patient>;
+  readonly user: User;
 };

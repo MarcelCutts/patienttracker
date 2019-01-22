@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, AsyncStorage } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import {
   Button,
@@ -14,7 +14,7 @@ type Props = {
   visible: boolean;
   patient: Patient;
   hideDialog: () => void;
-  navigate: (destingation: string) => void;
+  editPatient: (patient: Patient) => void;
 };
 
 type State = {
@@ -27,31 +27,23 @@ export class EditPatient extends React.Component<Props, State> {
   };
 
   updatePatient = async () => {
-    const { patient } = this.props;
+    const { patient, editPatient } = this.props;
     const updatedPatient = {
       ...patient,
       comments: this.state.comments
     };
 
-    await AsyncStorage.setItem(
-      `Patient-${patient.id}`,
-      JSON.stringify(updatedPatient)
-    );
-    this.props.navigate("Home");
+    editPatient(updatedPatient);
   };
 
-  finishPatient = async () => {
-    const { patient } = this.props;
+  finishPatient = () => {
+    const { patient, editPatient } = this.props;
     const finishedPatient = {
       ...patient,
       timeEnded: Date.now()
     };
 
-    await AsyncStorage.setItem(
-      `Patient-${patient.id}`,
-      JSON.stringify(finishedPatient)
-    );
-    this.props.navigate("Home");
+    editPatient(finishedPatient);
   };
 
   render() {

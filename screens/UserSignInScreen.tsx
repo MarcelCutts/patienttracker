@@ -1,14 +1,18 @@
 import * as React from "react";
-import { StyleSheet, AsyncStorage, KeyboardAvoidingView } from "react-native";
+import { StyleSheet, KeyboardAvoidingView } from "react-native";
 import { TextInput, Button, HelperText } from "react-native-paper";
 import { createStackNavigator, NavigationScreenProp } from "react-navigation";
 import { withNamespaces, WithNamespaces } from "react-i18next";
 import i18n from "i18next";
+import { connect } from "react-redux";
 import { LanguageSelector } from "../components/LanguageSelector";
+import { setUser } from "../state/actions";
+import { User } from "../types";
 
 interface Props {
   navigation: NavigationScreenProp<any, any>;
   t: i18n.TranslationFunction;
+  setUser: (user: User) => void;
 }
 
 interface RequiredField {
@@ -66,18 +70,16 @@ export class UserSignInScreen extends React.Component<
     return isValid;
   };
 
-  signIn = async () => {
+  signIn = () => {
     if (!this.areFieldsValid()) return;
 
     const { name, stationId, facilityId } = this.state;
-    await AsyncStorage.setItem(
-      "user",
-      JSON.stringify({
-        name: name.value,
-        stationId: stationId.value,
-        facilityId: facilityId.value
-      })
-    );
+    this.props.setUser({
+      staffName: name.value,
+      stationId: stationId.value,
+      facilityId: facilityId.value
+    });
+
     this.props.navigation.navigate("Home");
   };
 
@@ -124,8 +126,16 @@ export class UserSignInScreen extends React.Component<
   }
 }
 
+const mapDispactToProps = dispatch => ({
+  setUser: user => dispatch(setUser(user))
+});
+const USIS = connect(
+  null,
+  mapDispactToProps
+)(UserSignInScreen);
+
 export const UserSignInStack = createStackNavigator({
-  UserSignIn: withNamespaces(["signIn"], { wait: true })(UserSignInScreen)
+  UserSignIn: withNamespaces(["signIn"], { wait: true })(USIS)
 });
 
 const styles = StyleSheet.create({

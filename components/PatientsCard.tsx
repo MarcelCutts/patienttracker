@@ -1,15 +1,14 @@
 import * as React from "react";
-import { View, StyleSheet, AsyncStorage } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { Card, Title, Text, Button } from "react-native-paper";
 import { MaterialIcons } from "@expo/vector-icons";
-import { connect } from "react-redux";
-import { Patient, State } from "../types";
+import { Patient } from "../types";
 
 interface Props {
   patients: Array<Patient>;
 }
 
-export const PatientsCardComponent = ({ patients }: Props) => {
+export const PatientsCard = ({ patients }: Props) => {
   const completed = patients.filter(p => !!p.timeEnded).length;
   const inQueue = patients.length - completed;
   return (
@@ -30,12 +29,6 @@ export const PatientsCardComponent = ({ patients }: Props) => {
     </Card>
   );
 };
-
-const mapStateToProps = (state: State) => ({
-  patients: state.patients
-});
-
-export const PatientsCard = connect(mapStateToProps)(PatientsCardComponent);
 
 const styles = StyleSheet.create({
   content: {

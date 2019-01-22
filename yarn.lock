@@ -671,10 +671,10 @@
     pouchdb-collections "^1.0.1"
     tiny-queue "^0.2.1"
 
-"@types/expo@^31.0.7":
-  version "31.0.7"
-  resolved "https://registry.yarnpkg.com/@types/expo/-/expo-31.0.7.tgz#d03f67bab9cb00c05715b5d60edad1c6c6633968"
-  integrity sha512-W6ywc/+7OWJ/+iwQ1Te5zJskKSbwz0nyeTe6+JnQL+EkQ4Ih/t5xxs/XcsZtwv+iCydOvrHF1xGary4g+awOeA==
+"@types/expo@^31.0.8":
+  version "31.0.8"
+  resolved "https://registry.yarnpkg.com/@types/expo/-/expo-31.0.8.tgz#e5e8b9a88087220e6cfa10a8ec940587eaefcf1d"
+  integrity sha512-FuH7CnyicH2IZxOZHuwkkgUTZDnx4SF0KZ8B6XZ/y1ReEStY98c7ntcdzsO0+gHj4IRjB+ou4j7CvJ2tJKYYjg==
   dependencies:
     "@types/fbemitter" "*"
     "@types/react" "*"

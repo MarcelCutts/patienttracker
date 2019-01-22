@@ -1,16 +1,22 @@
 import * as React from "react";
-import { StyleSheet, Text, View, AsyncStorage } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { FAB, Portal } from "react-native-paper";
 import { BarCodeScanner, Permissions } from "expo";
 import { AddPatient } from "../components/AddPatient";
 import { NavigationScreenProp } from "react-navigation";
 import { EditPatient } from "../components/EditPatient";
 import { EnterPatientId } from "../components/EnterPatientId";
-import { Patient } from "../types";
+import { Patient, Store, User } from "../types";
 import { ViewPatient } from "../components/ViewPatient";
+import { connect } from "react-redux";
+import { addPatient, editPatient } from "../state/actions";
 
 interface Props {
   navigation: NavigationScreenProp<any, any>;
+  patients: Array<Patient>;
+  user: User;
+  addPatient: (patient: Patient) => void;
+  editPatient: (patient: Patient) => void;
 }
 
 enum DisplayType {
@@ -28,7 +34,7 @@ interface State {
   patient: null | Patient;
 }
 
-export default class QrScreen extends React.Component<Props, State> {
+class QrScreen extends React.Component<Props, State> {
   state = {
     hasCameraPermission: null,
     token: null,
@@ -44,6 +50,22 @@ export default class QrScreen extends React.Component<Props, State> {
   }
 
   hideDialog = () => this.setState({ display: DisplayType.Scanner });
+
+  addPatient = addEvent => {
+    const { addPatient, user, navigation } = this.props;
+    addPatient({
+      ...user,
+      timeStarted: Date.now(),
+      ...addEvent
+    });
+
+    navigation.navigate("Home");
+  };
+
+  editPatient = patient => {
+    this.props.editPatient(patient);
+    this.props.navigation.navigate("Home");
+  };
 
   render() {
     const { hasCameraPermission, token, patient, display } = this.state;
@@ -73,7 +95,7 @@ export default class QrScreen extends React.Component<Props, State> {
             visible={display === DisplayType.AddPatient}
             token={token}
             hideDialog={this.hideDialog}
-            navigate={this.props.navigation.navigate}
+            addPatient={this.addPatient}
           />
           {!!patient && (
             <>
@@ -81,7 +103,7 @@ export default class QrScreen extends React.Component<Props, State> {
                 visible={display === DisplayType.EditPatient}
                 patient={patient}
                 hideDialog={this.hideDialog}
-                navigate={this.props.navigation.navigate}
+                editPatient={this.editPatient}
               />
               <ViewPatient
                 visible={display === DisplayType.ViewPatient}
@@ -102,7 +124,7 @@ export default class QrScreen extends React.Component<Props, State> {
   }
 
   handlePatient = async ({ data }) => {
-    const patient = JSON.parse(await AsyncStorage.getItem(`Patient-${data}`));
+    const patient = this.props.patients.find(p => p.id === data);
     const display = !patient ? DisplayType.AddPatient : DisplayType.EditPatient;
 
     this.setState({ patient, token: data, display });
@@ -111,6 +133,21 @@ export default class QrScreen extends React.Component<Props, State> {
   handleEnterManually = () =>
     this.setState({ display: DisplayType.ManualEntry });
 }
+
+const mapStateToProps = (state: Store) => ({
+  patients: state.patients,
+  user: state.user
+});
+
+const mapDispatchToProps = dispatch => ({
+  addPatient: patient => dispatch(addPatient(patient)),
+  editPatient: patient => dispatch(editPatient(patient))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(QrScreen);
 
 const styles = StyleSheet.create({
   container: { flex: 1 },

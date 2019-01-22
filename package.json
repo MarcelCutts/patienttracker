@@ -27,7 +27,7 @@
     "typesafe-actions": "^3.0.0"
   },
   "devDependencies": {
-    "@types/expo": "^31.0.7",
+    "@types/expo": "^31.0.8",
     "@types/expo__vector-icons": "^6.2.3",
     "@types/react-i18next": "^8.1.0",
     "@types/react-navigation": "^3.0.1",

@@ -11,7 +11,7 @@ export const UserCard = ({ user, updateUser }) =>
           <MaterialIcons name="person" size={60} />
         </View>
         <View>
-          <Title>{user.name}</Title>
+          <Title>{user.staffName}</Title>
           <Text>Station: {user.stationId}</Text>
           <Text>Facility: {user.facilityId}</Text>
         </View>

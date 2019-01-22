@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, AsyncStorage } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import {
   Button,
@@ -8,13 +8,12 @@ import {
   TextInput,
   Divider
 } from "react-native-paper";
-import { Patient } from "../types";
 
 type Props = {
   visible: boolean;
   token: string;
   hideDialog: () => void;
-  navigate: (destingation: string) => void;
+  addPatient: (addEvent: any) => void;
 };
 
 type State = {
@@ -27,7 +26,8 @@ export class AddPatient extends React.Component<Props, State> {
   };
 
   render() {
-    const { visible, token, hideDialog } = this.props;
+    const { visible, token, hideDialog, addPatient } = this.props;
+    const { comments } = this.state;
     return (
       <Dialog visible={visible} onDismiss={hideDialog}>
         <Dialog.Title>Add patient to queue?</Dialog.Title>
@@ -41,36 +41,27 @@ export class AddPatient extends React.Component<Props, State> {
             mode="outlined"
             label="Comments"
             onChangeText={text => this.setState({ comments: text })}
-            value={this.state.comments}
+            value={comments}
           />
         </Dialog.Content>
         <Divider />
         <Dialog.Actions>
           <Button onPress={hideDialog}>Cancel</Button>
-          <Button onPress={this.addPatient} mode="contained">
+          <Button
+            onPress={() =>
+              addPatient({
+                id: token,
+                comments
+              })
+            }
+            mode="contained"
+          >
             Add to queue
           </Button>
         </Dialog.Actions>
       </Dialog>
     );
   }
-
-  addPatient = async () => {
-    const patientId = this.props.token;
-    const comments = this.state.comments;
-    const user = JSON.parse(await AsyncStorage.getItem("user"));
-    const entry: Patient = {
-      staffName: user.name,
-      facilityId: user.facilityId,
-      stationId: user.stationId,
-      timeStarted: Date.now(),
-      id: patientId,
-      comments
-    };
-
-    await AsyncStorage.setItem(`Patient-${patientId}`, JSON.stringify(entry));
-    this.props.navigate("Home");
-  };
 }
 
 const styles = StyleSheet.create({
