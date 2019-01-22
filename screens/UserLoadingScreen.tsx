@@ -1,27 +1,24 @@
 import * as React from "react";
-import {
-  ActivityIndicator,
-  AsyncStorage,
-  StatusBar,
-  StyleSheet,
-  View
-} from "react-native";
+import { ActivityIndicator, StatusBar, StyleSheet, View } from "react-native";
 import { NavigationScreenProp } from "react-navigation";
+import { connect } from "react-redux";
+import { Store, User } from "../types";
 
 interface Props {
   navigation: NavigationScreenProp<any, any>;
+  user: User;
 }
 
-export class UserLoadingScreen extends React.Component<Props> {
+class UserLoadingScreenComponent extends React.Component<Props> {
   constructor(props: Props) {
     super(props);
     this.bootstrapAsync();
   }
 
-  bootstrapAsync = async () => {
-    const user = await AsyncStorage.getItem("user");
+  bootstrapAsync = () => {
+    const { user, navigation } = this.props;
 
-    this.props.navigation.navigate(user ? "Home" : "UserSignIn");
+    navigation.navigate(!!user ? "Home" : "UserSignIn");
   };
 
   render() {
@@ -33,6 +30,14 @@ export class UserLoadingScreen extends React.Component<Props> {
     );
   }
 }
+
+const mapStateToProps = (state: Store) => ({
+  user: state.user
+});
+
+export const UserLoadingScreen = connect(mapStateToProps)(
+  UserLoadingScreenComponent
+);
 
 const styles = StyleSheet.create({
   container: {

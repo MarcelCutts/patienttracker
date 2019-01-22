@@ -12,8 +12,12 @@ export const UserCard = ({ user, updateUser }) =>
         </View>
         <View>
           <Title>{user.staffName}</Title>
-          <Text>Station: {user.stationId}</Text>
-          <Text>Facility: {user.facilityId}</Text>
+          <Text>
+            <Text style={styles.subtle}>Station</Text> {user.stationId}
+          </Text>
+          <Text>
+            <Text style={styles.subtle}>Facility</Text> {user.facilityId}
+          </Text>
         </View>
       </Card.Content>
       <Card.Actions>
@@ -24,10 +28,14 @@ export const UserCard = ({ user, updateUser }) =>
 
 const styles = StyleSheet.create({
   content: {
-    flexDirection: "row"
+    flexDirection: "row",
+    marginBottom: 8
   },
   userIcon: {
     paddingRight: 12,
     alignSelf: "center"
+  },
+  subtle: {
+    color: "rgba(0,0,0,0.5)"
   }
 });

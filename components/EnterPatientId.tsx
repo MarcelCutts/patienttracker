@@ -1,12 +1,6 @@
 import React from "react";
 import { StyleSheet } from "react-native";
-import {
-  Button,
-  Dialog,
-  Paragraph,
-  TextInput,
-  Divider
-} from "react-native-paper";
+import { Button, Dialog, TextInput, Divider } from "react-native-paper";
 
 type Props = {
   visible: boolean;

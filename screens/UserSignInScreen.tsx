@@ -127,15 +127,16 @@ export class UserSignInScreen extends React.Component<
 }
 
 const mapDispactToProps = dispatch => ({
-  setUser: user => dispatch(setUser(user))
+  setUser: (user: User) => dispatch(setUser(user))
 });
-const USIS = connect(
-  null,
-  mapDispactToProps
-)(UserSignInScreen);
 
 export const UserSignInStack = createStackNavigator({
-  UserSignIn: withNamespaces(["signIn"], { wait: true })(USIS)
+  UserSignIn: withNamespaces(["signIn"], { wait: true })(
+    connect(
+      null,
+      mapDispactToProps
+    )(UserSignInScreen)
+  )
 });
 
 const styles = StyleSheet.create({
