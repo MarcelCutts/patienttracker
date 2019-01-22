@@ -3,11 +3,13 @@ import { UserLoadingScreen } from "../screens/UserLoadingScreen";
 import { UserSignInStack } from "../screens/UserSignInScreen";
 import HomeScreen from "../screens/HomeScreen";
 import QrScreen from "../screens/QrScreen";
+import { SettingsComponent } from "../screens/Settings";
 
 const HomeStack = createStackNavigator(
   {
     Home: HomeScreen,
-    Qr: QrScreen
+    Qr: QrScreen,
+    Settings: SettingsComponent
   },
   {
     initialRouteName: "Home"

@@ -1,14 +1,16 @@
 import * as React from "react";
 import { NavigationScreenProp } from "react-navigation";
 import { StyleSheet, View } from "react-native";
-import { withNamespaces, WithNamespaces } from "react-i18next";
-import { FAB } from "react-native-paper";
+import { WithNamespaces } from "react-i18next";
+import { FAB, Button } from "react-native-paper";
 import { LanguageSelector } from "../components/LanguageSelector";
 import { UserCard } from "../components/UserCard";
 import { PatientsCard } from "../components/PatientsCard";
 import { Patient, Store, User } from "../types";
 import { connect } from "react-redux";
 import { clearUser } from "../state/actions";
+import Header from "../components/Header";
+import { PatientList } from "../components/PatientList";
 
 interface Props {
   navigation: NavigationScreenProp<any, any>;
@@ -19,8 +21,7 @@ interface Props {
 
 class HomeScreen extends React.Component<Props & WithNamespaces> {
   static navigationOptions = {
-    title: "Patient Tracker",
-    headerRight: <LanguageSelector />
+    header: props => <Header {...props} />
   };
 
   updateUser = async () => {
@@ -34,8 +35,12 @@ class HomeScreen extends React.Component<Props & WithNamespaces> {
       <View style={styles.container}>
         <View style={styles.user}>
           <UserCard user={user} updateUser={this.updateUser} />
+
           <PatientsCard patients={patients} />
+          <Button mode="outlined">Upload</Button>
+          <PatientList />
         </View>
+
         <FAB
           style={styles.fab}
           icon="camera-alt"
