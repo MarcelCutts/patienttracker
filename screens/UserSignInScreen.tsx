@@ -78,7 +78,7 @@ export class UserSignInScreen extends React.Component<
         facilityId: facilityId.value
       })
     );
-    this.props.navigation.navigate("Main");
+    this.props.navigation.navigate("Home");
   };
 
   render() {

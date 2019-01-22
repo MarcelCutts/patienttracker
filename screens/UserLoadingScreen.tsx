@@ -21,7 +21,7 @@ export class UserLoadingScreen extends React.Component<Props> {
   bootstrapAsync = async () => {
     const user = await AsyncStorage.getItem("user");
 
-    this.props.navigation.navigate(false ? "Main" : "UserSignIn");
+    this.props.navigation.navigate(false ? "Home" : "UserSignIn");
   };
 
   render() {

@@ -1,10 +1,11 @@
 import * as React from "react";
-import { NavigationScreenProp } from "react-navigation";
+import { NavigationScreenProp, createStackNavigator } from "react-navigation";
 import { StyleSheet, View, AsyncStorage } from "react-native";
 import { withNamespaces, WithNamespaces } from "react-i18next";
 import { FAB } from "react-native-paper";
 import { LanguageSelector } from "../components/LanguageSelector";
 import { UserCard } from "../components/UserCard";
+import QrScreen from "./QrScreen";
 
 interface Props {
   navigation: NavigationScreenProp<any, any>;
@@ -20,10 +21,11 @@ interface State {
   user: null | User;
 }
 
-class HomeScreen extends React.Component<Props & WithNamespaces, State> {
-  state = {
-    user: null
-  };
+export default class HomeScreen extends React.Component<
+  Props & WithNamespaces,
+  State
+> {
+  state = { user: null };
 
   static navigationOptions = {
     title: "Patient Tracker",
@@ -57,8 +59,6 @@ class HomeScreen extends React.Component<Props & WithNamespaces, State> {
   }
 }
 
-export default withNamespaces(["home", "common"], { wait: true })(HomeScreen);
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
   },
   fab: {
     position: "absolute",
-    margin: 16,
+    margin: 24,
     right: 0,
     bottom: 0
   }
