@@ -1,6 +1,6 @@
 import * as React from "react";
 import { View, StyleSheet } from "react-native";
-import { Card, Title, Text, Button, Subheading } from "react-native-paper";
+import { Card, Title, Text, Button } from "react-native-paper";
 import { MaterialIcons } from "@expo/vector-icons";
 
 export const UserCard = ({ user, updateUser }) =>

@@ -13,3 +13,7 @@ export interface Patient {
   timeStarted: number;
   timeEnded?: number;
 }
+
+export type State = {
+  readonly patients: ReadonlyArray<Patient>;
+};

@@ -6,6 +6,8 @@ import { FAB } from "react-native-paper";
 import { LanguageSelector } from "../components/LanguageSelector";
 import { UserCard } from "../components/UserCard";
 import QrScreen from "./QrScreen";
+import { PatientsCard } from "../components/PatientsCard";
+import { Patient } from "../types";
 
 interface Props {
   navigation: NavigationScreenProp<any, any>;
@@ -19,13 +21,14 @@ interface User {
 
 interface State {
   user: null | User;
+  patients: Array<Patient>;
 }
 
 export default class HomeScreen extends React.Component<
   Props & WithNamespaces,
   State
 > {
-  state = { user: null };
+  state = { user: null, patients: [] };
 
   static navigationOptions = {
     title: "Patient Tracker",
@@ -37,9 +40,18 @@ export default class HomeScreen extends React.Component<
     this.props.navigation.navigate("UserSignIn");
   };
 
+  updatePatient = async () => {};
+
   componentDidMount = async () => {
-    let user = await AsyncStorage.getItem("user");
-    this.setState({ user: JSON.parse(user) });
+    let user = JSON.parse(await AsyncStorage.getItem("user"));
+    const patientKeys = (await AsyncStorage.getAllKeys()).filter(k =>
+      k.startsWith("Patient-")
+    );
+    const patients = (await AsyncStorage.multiGet(patientKeys)).map(p =>
+      JSON.parse(p[1])
+    );
+
+    this.setState({ patients, user });
   };
 
   render() {
@@ -48,6 +60,7 @@ export default class HomeScreen extends React.Component<
       <View style={styles.container}>
         <View style={styles.user}>
           <UserCard user={this.state.user} updateUser={this.updateUser} />
+          <PatientsCard patients={this.state.patients} />
         </View>
         <FAB
           style={styles.fab}

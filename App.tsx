@@ -6,6 +6,9 @@ import AppNavigator from "./navigation/AppNavigator";
 import { withNamespaces, I18nextProvider } from "react-i18next";
 import { Provider as PaperProvider } from "react-native-paper";
 import i18n from "./i18n";
+import configureStore from "./state/configureStore";
+import { PersistGate } from "redux-persist/integration/react";
+import { Provider } from "react-redux";
 
 const navigationPersistenceKey = __DEV__ ? "NavigationStateDEV" : null;
 const WrappedStack = ({ t }) => (
@@ -18,19 +21,19 @@ const ReloadAppOnLanguageChange = withNamespaces("common", {
   wait: true
 })(WrappedStack);
 
+const { store, persistor } = configureStore();
+
 interface Props {
   skipLoadingScreen: boolean;
 }
 
 interface State {
   isLoadingComplete: boolean;
-  currentUser: Object;
 }
 
 export default class App extends React.Component<Props, State> {
   state = {
-    isLoadingComplete: false,
-    currentUser: {}
+    isLoadingComplete: false
   };
 
   render() {
@@ -44,14 +47,18 @@ export default class App extends React.Component<Props, State> {
       );
     } else {
       return (
-        <I18nextProvider i18n={i18n}>
-          <PaperProvider>
-            <View style={styles.container}>
-              {Platform.OS === "ios" && <StatusBar barStyle="default" />}
-              <ReloadAppOnLanguageChange />
-            </View>
-          </PaperProvider>
-        </I18nextProvider>
+        <Provider store={store}>
+          <PersistGate loading={null} persistor={persistor}>
+            <I18nextProvider i18n={i18n}>
+              <PaperProvider>
+                <View style={styles.container}>
+                  {Platform.OS === "ios" && <StatusBar barStyle="default" />}
+                  <ReloadAppOnLanguageChange />
+                </View>
+              </PaperProvider>
+            </I18nextProvider>
+          </PersistGate>
+        </Provider>
       );
     }
   }
