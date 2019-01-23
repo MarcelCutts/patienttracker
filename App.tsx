@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Platform, StatusBar, StyleSheet, View } from "react-native";
-import { AppLoading, Asset, Font } from "expo";
+import { AppLoading, Asset, Font, Amplitude } from "expo";
 import { Ionicons } from "@expo/vector-icons";
 import AppNavigator from "./navigation/AppNavigator";
 import { withNamespaces, I18nextProvider } from "react-i18next";
@@ -30,6 +30,10 @@ interface Props {
 interface State {
   isLoadingComplete: boolean;
 }
+
+Amplitude.initialize("1f5efd89d067fa4975a612f3af768925");
+Amplitude.setUserId("testt");
+Amplitude.logEvent("a...awooo");
 
 export default class App extends React.Component<Props, State> {
   state = {
