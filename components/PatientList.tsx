@@ -28,40 +28,37 @@ export const PatientList = ({ patients }: Props) => {
         </Subheading>
       </View>
       <FlatList
-        data={[
-          { key: "Devin" },
-          { key: "Jackson" },
-          { key: "James" },
-          { key: "Joel" },
-          { key: "John" },
-          { key: "Jillian" },
-          { key: "Jimmy" },
-          { key: "Julie" }
-        ]}
+        data={patients}
+        keyExtractor={item => item.id}
         renderItem={({ item }) => (
           <>
             <List.Item
-              title={item.key}
+              title={item.id}
               description="Started at 18:22"
-              right={() => (
-                <Button
-                  style={{ alignSelf: "center" }}
-                  mode="outlined"
-                  icon="edit"
-                  onPress={() => undefined}
-                >
-                  edit
-                </Button>
-              )}
+              right={() =>
+                item.timeEnded ? (
+                  <Button
+                    style={{ alignSelf: "center" }}
+                    mode="outlined"
+                    icon="pageview"
+                    onPress={() => undefined}
+                  >
+                    view
+                  </Button>
+                ) : (
+                  <Button
+                    style={{ alignSelf: "center" }}
+                    mode="outlined"
+                    icon="edit"
+                    onPress={() => undefined}
+                  >
+                    edit
+                  </Button>
+                )
+              }
             />
             <Divider inset />
           </>
-          // <Card elevation={4} style={styles.item}>
-          //   <Card.Content>
-          //     <Title>{item.key}</Title>
-          //     <Subheading>Started at 17:40</Subheading>
-          //   </Card.Content>
-          // </Card>
         )}
       />
     </View>
