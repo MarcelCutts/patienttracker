@@ -48,6 +48,7 @@ export const PatientList = ({ patients }: Props) => {
                   style={{ alignSelf: "center" }}
                   mode="outlined"
                   icon="edit"
+                  onPress={() => undefined}
                 >
                   edit
                 </Button>
