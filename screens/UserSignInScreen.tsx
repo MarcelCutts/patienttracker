@@ -32,14 +32,11 @@ export class UserSignInScreen extends React.Component<
   Props & WithNamespaces,
   State
 > {
-  constructor(props: Props & WithNamespaces) {
-    super(props);
-    this.state = {
-      name: { value: "", error: false },
-      stationId: { value: "", error: false },
-      facilityId: { value: "", error: false }
-    };
-  }
+  state = {
+    name: { value: "", error: false },
+    stationId: { value: "", error: false },
+    facilityId: { value: "", error: false }
+  };
 
   static navigationOptions = ({ screenProps }) => ({
     title: screenProps.t("signIn:title"),
@@ -85,6 +82,7 @@ export class UserSignInScreen extends React.Component<
 
   render() {
     const { t } = this.props;
+    const { name, facilityId, stationId } = this.state;
     return (
       <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
         <TextInput
@@ -114,7 +112,10 @@ export class UserSignInScreen extends React.Component<
           error={this.state.facilityId.error}
         />
 
-        <HelperText type="error" visible={this.state.name.error}>
+        <HelperText
+          type="error"
+          visible={name.error || stationId.error || facilityId.error}
+        >
           Please enter all details
         </HelperText>
 
