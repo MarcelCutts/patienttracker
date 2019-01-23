@@ -35,11 +35,8 @@ class HomeScreen extends React.Component<Props & WithNamespaces> {
       <View style={styles.container}>
         <View style={styles.user}>
           <UserCard user={user} updateUser={this.updateUser} />
-
-          <PatientsCard patients={patients} />
-          <Button mode="outlined">Upload</Button>
-          <PatientList />
         </View>
+        <PatientList patients={patients} />
 
         <FAB
           style={styles.fab}
