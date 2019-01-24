@@ -125,7 +125,9 @@ class QrScreen extends React.Component<Props, State> {
 
   handlePatient = async ({ data }) => {
     const patient = this.props.patients.find(p => p.id === data);
-    const display = !patient ? DisplayType.AddPatient : DisplayType.EditPatient;
+    let display = DisplayType.AddPatient;
+    if (!!patient) display = DisplayType.EditPatient;
+    if (!!patient && !!patient.timeEnded) display = DisplayType.ViewPatient;
 
     this.setState({ patient, token: data, display });
   };
@@ -140,8 +142,8 @@ const mapStateToProps = (state: Store) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  addPatient: patient => dispatch(addPatient(patient)),
-  editPatient: patient => dispatch(editPatient(patient))
+  addPatient: (patient: Patient) => dispatch(addPatient(patient)),
+  editPatient: (patient: Patient) => dispatch(editPatient(patient))
 });
 
 export default connect(
