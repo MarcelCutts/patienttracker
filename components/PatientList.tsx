@@ -48,7 +48,9 @@ export class PatientList extends React.Component<Props, State> {
             <>
               <List.Item
                 title={item.id}
-                description="Started at 18:22"
+                description={`Started at ${new Date(
+                  item.timeStarted
+                ).toLocaleTimeString()}`}
                 right={() => (
                   <Button
                     style={{ alignSelf: "center" }}
