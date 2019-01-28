@@ -10,7 +10,7 @@
     "icon": "./assets/images/icon.png",
     "splash": {
       "image": "./assets/images/gheskisplash.png",
-      "resizeMode": "contain",
+      "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
     "updates": {
@@ -19,6 +19,7 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
-    }
+    },
+    "description": ""
   }
 }

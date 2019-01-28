@@ -8,15 +8,16 @@ import { UserCard } from "../components/UserCard";
 import { PatientsCard } from "../components/PatientsCard";
 import { Patient, Store, User } from "../types";
 import { connect } from "react-redux";
-import { clearUser } from "../state/actions";
+import { clearUser, editPatient } from "../state/actions";
 import Header from "../components/Header";
 import { PatientList } from "../components/PatientList";
 
 interface Props {
   navigation: NavigationScreenProp<any, any>;
   user: User;
-  patients: Array<Patient>;
   clearUser: () => void;
+  patients: Array<Patient>;
+  editPatient: (patient: Patient) => void;
 }
 
 class HomeScreen extends React.Component<Props & WithNamespaces> {
@@ -30,13 +31,13 @@ class HomeScreen extends React.Component<Props & WithNamespaces> {
   };
 
   render() {
-    const { navigation, user, patients } = this.props;
+    const { navigation, user, patients, editPatient } = this.props;
     return (
       <View style={styles.container}>
         <View style={styles.user}>
           <UserCard user={user} updateUser={this.updateUser} />
         </View>
-        <PatientList patients={patients} />
+        <PatientList patients={patients} editPatient={editPatient} />
 
         <FAB
           style={styles.fab}
@@ -53,7 +54,8 @@ const mapStateToProps = (state: Store) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  clearUser: () => dispatch(clearUser())
+  clearUser: () => dispatch(clearUser()),
+  editPatient: (patient: Patient) => dispatch(editPatient(patient))
 });
 
 export default connect(

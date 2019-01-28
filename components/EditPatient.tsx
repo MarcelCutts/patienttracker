@@ -14,6 +14,7 @@ type Props = {
   visible: boolean;
   patient: Patient;
   hideDialog: () => void;
+  completeDialog: () => void;
   editPatient: (patient: Patient) => void;
 };
 
@@ -27,23 +28,25 @@ export class EditPatient extends React.Component<Props, State> {
   };
 
   updatePatient = async () => {
-    const { patient, editPatient } = this.props;
+    const { patient, editPatient, completeDialog } = this.props;
     const updatedPatient = {
       ...patient,
       comments: this.state.comments
     };
 
     editPatient(updatedPatient);
+    completeDialog();
   };
 
   finishPatient = () => {
-    const { patient, editPatient } = this.props;
+    const { patient, editPatient, completeDialog } = this.props;
     const finishedPatient = {
       ...patient,
       timeEnded: Date.now()
     };
 
     editPatient(finishedPatient);
+    completeDialog();
   };
 
   render() {

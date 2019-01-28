@@ -51,6 +51,8 @@ class QrScreen extends React.Component<Props, State> {
 
   hideDialog = () => this.setState({ display: DisplayType.Scanner });
 
+  completeDialog = () => this.props.navigation.navigate("Home");
+
   addPatient = addEvent => {
     const { addPatient, user, navigation } = this.props;
     addPatient({
@@ -62,12 +64,8 @@ class QrScreen extends React.Component<Props, State> {
     navigation.navigate("Home");
   };
 
-  editPatient = patient => {
-    this.props.editPatient(patient);
-    this.props.navigation.navigate("Home");
-  };
-
   render() {
+    const { editPatient } = this.props;
     const { hasCameraPermission, token, patient, display } = this.state;
 
     if (hasCameraPermission === null) {
@@ -103,7 +101,8 @@ class QrScreen extends React.Component<Props, State> {
                 visible={display === DisplayType.EditPatient}
                 patient={patient}
                 hideDialog={this.hideDialog}
-                editPatient={this.editPatient}
+                completeDialog={this.completeDialog}
+                editPatient={editPatient}
               />
               <ViewPatient
                 visible={display === DisplayType.ViewPatient}
