@@ -1,16 +1,9 @@
 import * as React from "react";
 import { ActivityIndicator, StatusBar, StyleSheet, View } from "react-native";
-import { NavigationScreenProp } from "react-navigation";
 import { connect } from "react-redux";
-import { Store, User } from "../types";
 
-interface Props {
-  navigation: NavigationScreenProp<any, any>;
-  user: User;
-}
-
-class UserLoadingScreenComponent extends React.Component<Props> {
-  constructor(props: Props) {
+class UserLoadingScreenComponent extends React.Component {
+  constructor(props) {
     super(props);
     this.bootstrapAsync();
   }
@@ -31,7 +24,7 @@ class UserLoadingScreenComponent extends React.Component<Props> {
   }
 }
 
-const mapStateToProps = (state: Store) => ({
+const mapStateToProps = state => ({
   user: state.user
 });
 

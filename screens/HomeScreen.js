@@ -1,26 +1,13 @@
 import * as React from "react";
-import { NavigationScreenProp } from "react-navigation";
 import { StyleSheet, View } from "react-native";
-import { WithNamespaces } from "react-i18next";
-import { FAB, Button } from "react-native-paper";
-import { LanguageSelector } from "../components/LanguageSelector";
+import { FAB } from "react-native-paper";
 import { UserCard } from "../components/UserCard";
-import { PatientsCard } from "../components/PatientsCard";
-import { Patient, Store, User } from "../types";
 import { connect } from "react-redux";
 import { clearUser, editPatient } from "../state/actions";
 import Header from "../components/Header";
 import { PatientList } from "../components/PatientList";
 
-interface Props {
-  navigation: NavigationScreenProp<any, any>;
-  user: User;
-  clearUser: () => void;
-  patients: Array<Patient>;
-  editPatient: (patient: Patient) => void;
-}
-
-class HomeScreen extends React.Component<Props & WithNamespaces> {
+class HomeScreen extends React.Component {
   static navigationOptions = {
     header: props => <Header {...props} />
   };
@@ -48,14 +35,14 @@ class HomeScreen extends React.Component<Props & WithNamespaces> {
     );
   }
 }
-const mapStateToProps = (state: Store) => ({
+const mapStateToProps = state => ({
   user: state.user,
   patients: state.patients
 });
 
 const mapDispatchToProps = dispatch => ({
   clearUser: () => dispatch(clearUser()),
-  editPatient: (patient: Patient) => dispatch(editPatient(patient))
+  editPatient: patient => dispatch(editPatient(patient))
 });
 
 export default connect(

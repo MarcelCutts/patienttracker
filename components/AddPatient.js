@@ -8,25 +8,16 @@ import {
   TextInput,
   Divider
 } from "react-native-paper";
+import { addPatient } from "../state/actions";
+import { connect } from "react-redux";
 
-type Props = {
-  visible: boolean;
-  token: string;
-  hideDialog: () => void;
-  addPatient: (addEvent: any) => void;
-};
-
-type State = {
-  comments: string;
-};
-
-export class AddPatient extends React.Component<Props, State> {
+export class AddPatientComponent extends React.Component {
   state = {
     comments: ""
   };
 
   render() {
-    const { visible, token, hideDialog, addPatient } = this.props;
+    const { visible, patientId, user, hideDialog } = this.props;
     const { comments } = this.state;
     return (
       <Dialog visible={visible} onDismiss={hideDialog}>
@@ -34,7 +25,7 @@ export class AddPatient extends React.Component<Props, State> {
         <Dialog.Content>
           <View style={styles.container}>
             <MaterialCommunityIcons name="qrcode" size={80} />
-            <Paragraph>{token}</Paragraph>
+            <Paragraph>{patientId}</Paragraph>
           </View>
 
           <TextInput
@@ -50,8 +41,10 @@ export class AddPatient extends React.Component<Props, State> {
           <Button
             onPress={() =>
               addPatient({
-                id: token,
-                comments
+                id: patientId,
+                comments,
+                timeStarted: Date.now(),
+                ...user
               })
             }
             mode="contained"
@@ -63,6 +56,19 @@ export class AddPatient extends React.Component<Props, State> {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  user: state.user
+});
+
+const mapDispatchToProps = dispatch => ({
+  addPatient: patient => dispatch(addPatient(patient))
+});
+
+export const AddPatient = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AddPatientComponent);
 
 const styles = StyleSheet.create({
   container: { flexDirection: "row", marginBottom: 8 },

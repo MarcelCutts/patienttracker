@@ -1,15 +1,8 @@
 import * as React from "react";
 import { View, StyleSheet } from "react-native";
 import { Card, Title, Text, Button, Avatar } from "react-native-paper";
-import { MaterialIcons } from "@expo/vector-icons";
-import { User } from "../types";
 
-interface Props {
-  user: User;
-  updateUser: () => void;
-}
-
-const getInitials = (name: String) => {
+const getInitials = name => {
   const nameParts = name.split(" ");
 
   if (nameParts.length === 1) return name[0];
@@ -18,7 +11,7 @@ const getInitials = (name: String) => {
   return firstName[0] + lastName[0];
 };
 
-export const UserCard = ({ user, updateUser }: Props) =>
+export const UserCard = ({ user, updateUser }) =>
   user && (
     <Card elevation={4}>
       <Card.Content style={styles.content}>

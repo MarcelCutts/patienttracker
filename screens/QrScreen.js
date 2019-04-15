@@ -3,38 +3,22 @@ import { StyleSheet, Text, View } from "react-native";
 import { FAB, Portal } from "react-native-paper";
 import { BarCodeScanner, Permissions } from "expo";
 import { AddPatient } from "../components/AddPatient";
-import { NavigationScreenProp } from "react-navigation";
 import { EditPatient } from "../components/EditPatient";
 import { EnterPatientId } from "../components/EnterPatientId";
-import { Patient, Store, User } from "../types";
+
 import { ViewPatient } from "../components/ViewPatient";
 import { connect } from "react-redux";
 import { addPatient, editPatient } from "../state/actions";
 
-interface Props {
-  navigation: NavigationScreenProp<any, any>;
-  patients: Array<Patient>;
-  user: User;
-  addPatient: (patient: Patient) => void;
-  editPatient: (patient: Patient) => void;
-}
+const DisplayType = {
+  Scanner: "Scanner",
+  AddPatient: "AddPatient",
+  EditPatient: "EditPatient",
+  ViewPatient: "ViewPatient",
+  ManualEntry: "ManualEntry"
+};
 
-enum DisplayType {
-  Scanner,
-  AddPatient,
-  EditPatient,
-  ViewPatient,
-  ManualEntry
-}
-
-interface State {
-  hasCameraPermission: null | boolean;
-  display: DisplayType;
-  token: null | string;
-  patient: null | Patient;
-}
-
-class QrScreen extends React.Component<Props, State> {
+class QrScreen extends React.Component {
   state = {
     hasCameraPermission: null,
     token: null,
@@ -91,8 +75,9 @@ class QrScreen extends React.Component<Props, State> {
         <Portal>
           <AddPatient
             visible={display === DisplayType.AddPatient}
-            token={token}
+            patientId={token}
             hideDialog={this.hideDialog}
+            completeDialog={this.completeDialog}
             addPatient={this.addPatient}
           />
           {!!patient && (
@@ -135,14 +120,14 @@ class QrScreen extends React.Component<Props, State> {
     this.setState({ display: DisplayType.ManualEntry });
 }
 
-const mapStateToProps = (state: Store) => ({
+const mapStateToProps = state => ({
   patients: state.patients,
   user: state.user
 });
 
 const mapDispatchToProps = dispatch => ({
-  addPatient: (patient: Patient) => dispatch(addPatient(patient)),
-  editPatient: (patient: Patient) => dispatch(editPatient(patient))
+  addPatient: patient => dispatch(addPatient(patient)),
+  editPatient: patient => dispatch(editPatient(patient))
 });
 
 export default connect(

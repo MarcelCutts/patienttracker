@@ -1,7 +1,6 @@
 import { combineReducers } from "redux";
-import { Store } from "../types";
 
-export const rootReducer = combineReducers<Store>({
+export const rootReducer = combineReducers({
   patients: (state = [], action) => {
     switch (action.type) {
       case "ADD_PATIENT":

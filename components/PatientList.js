@@ -8,19 +8,9 @@ import {
   Button,
   Portal
 } from "react-native-paper";
-import { Patient, User } from "../types";
 import { EditPatient } from "./EditPatient";
 
-interface State {
-  selectedPatient: Patient;
-}
-
-interface Props {
-  patients: Array<Patient>;
-  editPatient: (patient: Patient) => void;
-}
-
-export class PatientList extends React.Component<Props, State> {
+export class PatientList extends React.Component {
   state = {
     selectedPatient: null
   };
@@ -29,7 +19,7 @@ export class PatientList extends React.Component<Props, State> {
   completeDialog = () => this.setState({ selectedPatient: null });
 
   render() {
-    const { patients, editPatient }: Props = this.props;
+    const { patients, editPatient } = this.props;
     const { selectedPatient } = this.state;
     const inQueue = patients.filter(p => !p.timeEnded);
     return (

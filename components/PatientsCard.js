@@ -1,13 +1,8 @@
 import * as React from "react";
 import { View, StyleSheet } from "react-native";
-import { Title, Text, Headline, Card, Subheading } from "react-native-paper";
-import { Patient } from "../types";
+import { Headline, Subheading } from "react-native-paper";
 
-interface Props {
-  patients: Array<Patient>;
-}
-
-export const PatientsCard = ({ patients }: Props) => {
+export const PatientsCard = ({ patients }) => {
   const completed = patients.filter(p => !!p.timeEnded).length;
   const inQueue = patients.length - completed;
   return (

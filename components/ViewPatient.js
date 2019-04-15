@@ -8,15 +8,8 @@ import {
   TextInput,
   Divider
 } from "react-native-paper";
-import { Patient } from "../types";
 
-type Props = {
-  visible: boolean;
-  patient: Patient;
-  hideDialog: () => void;
-};
-
-export const ViewPatient = ({ visible, hideDialog, patient }: Props) => (
+export const ViewPatient = ({ visible, hideDialog, patient }) => (
   <Dialog visible={visible} onDismiss={hideDialog}>
     <Dialog.Title>Completed patient</Dialog.Title>
     <Dialog.Content>

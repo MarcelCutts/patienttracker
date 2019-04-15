@@ -8,21 +8,8 @@ import {
   TextInput,
   Divider
 } from "react-native-paper";
-import { Patient } from "../types";
 
-type Props = {
-  visible: boolean;
-  patient: Patient;
-  hideDialog: () => void;
-  completeDialog: () => void;
-  editPatient: (patient: Patient) => void;
-};
-
-type State = {
-  comments: string;
-};
-
-export class EditPatient extends React.Component<Props, State> {
+export class EditPatient extends React.Component {
   state = {
     comments: this.props.patient && this.props.patient.comments
   };

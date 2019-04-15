@@ -2,17 +2,7 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import { Button, Dialog, TextInput, Divider } from "react-native-paper";
 
-type Props = {
-  visible: boolean;
-  handlePatient: ({ data: string }) => void;
-  hideDialog: () => void;
-};
-
-type State = {
-  patientId: string;
-};
-
-export class EnterPatientId extends React.Component<Props, State> {
+export class EnterPatientId extends React.Component {
   state = {
     patientId: ""
   };

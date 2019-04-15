@@ -1,37 +1,14 @@
 import * as React from "react";
 import { StyleSheet, KeyboardAvoidingView } from "react-native";
 import { TextInput, Button, HelperText } from "react-native-paper";
-import { createStackNavigator, NavigationScreenProp } from "react-navigation";
-import { withNamespaces, WithNamespaces } from "react-i18next";
+import { createStackNavigator } from "react-navigation";
+import { withNamespaces } from "react-i18next";
 import i18n from "i18next";
 import { connect } from "react-redux";
 import { LanguageSelector } from "../components/LanguageSelector";
 import { setUser } from "../state/actions";
-import { User } from "../types";
 
-interface Props {
-  navigation: NavigationScreenProp<any, any>;
-  t: i18n.TranslationFunction;
-  setUser: (user: User) => void;
-}
-
-interface RequiredField {
-  value: string;
-  error: boolean;
-}
-
-interface State {
-  name: RequiredField;
-  stationId: RequiredField;
-  facilityId: RequiredField;
-}
-
-type FieldNames = "name" | "stationId" | "facilityId";
-
-export class UserSignInScreen extends React.Component<
-  Props & WithNamespaces,
-  State
-> {
+export class UserSignInScreen extends React.Component {
   state = {
     name: { value: "", error: false },
     stationId: { value: "", error: false },
@@ -43,11 +20,8 @@ export class UserSignInScreen extends React.Component<
     headerRight: <LanguageSelector />
   });
 
-  updateField(text: string, fieldName: FieldNames) {
-    this.setState({ [fieldName]: { value: text, error: false } } as Pick<
-      State,
-      keyof State
-    >);
+  updateField(text, fieldName) {
+    this.setState({ [fieldName]: { value: text, error: false } });
   }
 
   areFieldsValid = () => {
@@ -128,7 +102,7 @@ export class UserSignInScreen extends React.Component<
 }
 
 const mapDispactToProps = dispatch => ({
-  setUser: (user: User) => dispatch(setUser(user))
+  setUser: user => dispatch(setUser(user))
 });
 
 export const UserSignInStack = createStackNavigator({
