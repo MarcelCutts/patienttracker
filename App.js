@@ -1,7 +1,6 @@
 import * as React from "react";
 import { Platform, StatusBar, StyleSheet, View } from "react-native";
-import { AppLoading, Asset, Font, Amplitude } from "expo";
-import { Ionicons } from "@expo/vector-icons";
+import { AppLoading, Font } from "expo";
 import AppNavigator from "./navigation/AppNavigator";
 import { withNamespaces, I18nextProvider } from "react-i18next";
 import { Provider as PaperProvider } from "react-native-paper";
@@ -23,19 +22,7 @@ const ReloadAppOnLanguageChange = withNamespaces("common", {
 
 const { store, persistor } = configureStore();
 
-interface Props {
-  skipLoadingScreen: boolean;
-}
-
-interface State {
-  isLoadingComplete: boolean;
-}
-
-Amplitude.initialize("1f5efd89d067fa4975a612f3af768925");
-Amplitude.setUserId("testt");
-Amplitude.logEvent("a...awooo");
-
-export default class App extends React.Component<Props, State> {
+export default class App extends React.Component {
   state = {
     isLoadingComplete: false
   };
