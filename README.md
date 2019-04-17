@@ -1,4 +1,4 @@
-# Patient Tracker
+# Patient Tracker 👩‍⚕️⏱
 
 This application intends to track patients through multi-step clinical processes and upload this data to a data store.
 
