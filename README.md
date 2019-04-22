@@ -34,15 +34,37 @@ If you're having a problem with this part, check out the [React Native docs](htt
 
 ### Contributing
 
-// How to contribute
+The application is open and grateful for all your help! If you want to contribute, please check out the issues at the top of the project to see what needs doing. Should something important be missing, we would be happy for you to add it.
+
+For Pull Requests, it would be beneficial to stakeholders in this project to clearly state the problem you are solving, how you did it, and why you did it that way.
+
+And include a gif, if you want to be cool.
 
 #### Technology
 
-// What technology we use
+Patient Tracker is built on a prominent stack of [React Native](https://facebook.github.io/react-native/), [Redux](https://redux.js.org/), and [React-Native-Paper](https://reactnativepaper.com/).
+
+**React-Native** is a framework for building mobile applications using a declarative component style, which run on both iOS and Android. It abstracts away a lot of the tiresome work that you would normally have to consider when making an application in a more classical approach.
+
+**Redux** is the state container for our application. It provides a convenient way to store data in the application between screens, and even between applications. It is architected in a way to provide a great developer experience with a minimal chance of mutating internal data incorrectly.
+
+**React-Native-Paper** is a component library that provides pre-made (and pre-styled) React components following the modern Material Design system endorsed by google. This allows you to quickly compose together a professional looking app that you can be confident will render consistently across apps.
 
 #### Structure
 
-// Where stuff is in the application
+The code is structured into folders broadly representing the purposes of the files inside.
+
+The top (root) level has few entry points (where the app is started from) as well as configuration files that tell the application how to build and run. It also includes `i18n.js`, which is where we keep our translations for now.
+
+**Assets** holds all the non-code files we might need, like fonts or images.
+
+**Components** contains a number of React components we've written that when composed together, build the app.
+
+**Navigation** is made entirely of code that tell us how to navigate around the application. This one's small!
+
+**Screens** These are entry points for each screen in the app, with each screen having access to state, navigation and made of components.
+
+**State** State is how we store and manage both user interface and patient data.
 
 ## Remaining items to do before shipping
 
