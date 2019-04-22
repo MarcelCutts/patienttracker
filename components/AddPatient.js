@@ -16,8 +16,33 @@ export class AddPatientComponent extends React.Component {
     comments: ""
   };
 
+  addPatient = (
+    patientId,
+    comments,
+    user,
+    dispatchAddPatient,
+    completeDialog
+  ) => {
+    const newPatient = {
+      id: patientId,
+      comments,
+      timeStarted: Date.now(),
+      ...user
+    };
+
+    dispatchAddPatient(newPatient);
+    completeDialog();
+  };
+
   render() {
-    const { visible, patientId, user, hideDialog } = this.props;
+    const {
+      visible,
+      patientId,
+      user,
+      hideDialog,
+      dispatchAddPatient,
+      completeDialog
+    } = this.props;
     const { comments } = this.state;
     return (
       <Dialog visible={visible} onDismiss={hideDialog}>
@@ -40,12 +65,13 @@ export class AddPatientComponent extends React.Component {
           <Button onPress={hideDialog}>Cancel</Button>
           <Button
             onPress={() =>
-              addPatient({
-                id: patientId,
+              this.addPatient(
+                patientId,
                 comments,
-                timeStarted: Date.now(),
-                ...user
-              })
+                user,
+                dispatchAddPatient,
+                completeDialog
+              )
             }
             mode="contained"
           >
@@ -62,7 +88,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  addPatient: patient => dispatch(addPatient(patient))
+  dispatchAddPatient: patient => dispatch(addPatient(patient))
 });
 
 export const AddPatient = connect(
