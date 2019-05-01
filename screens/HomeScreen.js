@@ -1,7 +1,7 @@
 import * as React from "react";
 import { StyleSheet, View } from "react-native";
 import { FAB } from "react-native-paper";
-import { UserCard } from "../components/UserCard";
+import UserCard from "../components/UserCard";
 import { connect } from "react-redux";
 import { clearUser, editPatient } from "../state/actions";
 import Header from "../components/Header";

@@ -3,7 +3,6 @@ import { StyleSheet, KeyboardAvoidingView } from "react-native";
 import { TextInput, Button, HelperText } from "react-native-paper";
 import { createStackNavigator } from "react-navigation";
 import { withNamespaces } from "react-i18next";
-import i18n from "i18next";
 import { connect } from "react-redux";
 import { LanguageSelector } from "../components/LanguageSelector";
 import { setUser } from "../state/actions";
@@ -90,7 +89,7 @@ export class UserSignInScreen extends React.Component {
           type="error"
           visible={name.error || stationId.error || facilityId.error}
         >
-          Please enter all details
+          {t("signIn:error")}
         </HelperText>
 
         <Button icon="portrait" mode="contained" onPress={this.signIn}>

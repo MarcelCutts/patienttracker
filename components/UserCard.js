@@ -1,6 +1,7 @@
 import * as React from "react";
 import { View, StyleSheet } from "react-native";
 import { Card, Title, Text, Button, Avatar } from "react-native-paper";
+import { withNamespaces } from "react-i18next";
 
 const getInitials = name => {
   const nameParts = name.split(" ");
@@ -11,7 +12,7 @@ const getInitials = name => {
   return firstName[0] + lastName[0];
 };
 
-export const UserCard = ({ user, updateUser }) =>
+export const UserCardComponent = ({ user, updateUser, t }) =>
   user && (
     <Card elevation={4}>
       <Card.Content style={styles.content}>
@@ -21,20 +22,24 @@ export const UserCard = ({ user, updateUser }) =>
         <View>
           <Title>{user.staffName}</Title>
           <Text>
-            <Text style={styles.subtle}>Station</Text> {user.stationId}
+            <Text style={styles.subtle}>{t("home:station")}</Text>{" "}
+            {user.stationId}
           </Text>
           <Text>
-            <Text style={styles.subtle}>Facility</Text> {user.facilityId}
+            <Text style={styles.subtle}>{t("home:facility")}</Text>{" "}
+            {user.facilityId}
           </Text>
         </View>
       </Card.Content>
       <Card.Actions style={{ alignSelf: "flex-end" }}>
         <Button icon="update" onPress={updateUser}>
-          Update
+          {t("home:update")}
         </Button>
       </Card.Actions>
     </Card>
   );
+
+export default withNamespaces("home", { wait: true })(UserCardComponent);
 
 const styles = StyleSheet.create({
   content: {

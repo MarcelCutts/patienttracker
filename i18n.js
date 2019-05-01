@@ -25,11 +25,20 @@ i18n.use(languageDetector).init({
         signIn: "Sign in",
         name: "Name",
         stationId: "Station ID",
-        facilityId: "Facility ID"
+        facilityId: "Facility ID",
+        error: "Please enter all details"
       },
       home: {
-        title: "Welcome",
-        introduction: "This text comes from i18next and is provided in english."
+        title: "Patient tracker",
+        home: "Home",
+        station: "Station",
+        facility: "Facility",
+        update: "Update",
+        patients: "Patients",
+        inQueue: "in queue",
+        completed: "completed",
+        startedAt: "Started at",
+        edit: "Edit"
       }
     },
     ht: {
@@ -38,11 +47,20 @@ i18n.use(languageDetector).init({
         signIn: "Sove", // Technically "save"
         name: "itilizatè",
         stationId: "id estasyon",
-        facilityId: "id klinik"
+        facilityId: "id klinik",
+        error: "Tanpri, antre detay yo."
       },
       home: {
-        title: "Willkommen",
-        introduction: "Dieser Text ist von i18next und ist in deutsch."
+        title: "Patient tracker-HT",
+        home: "Home-HT",
+        station: "Estasyon",
+        facility: "Klinik",
+        update: "Aktyalizasyon",
+        patients: "Patients-HT",
+        inQueue: "in queue-HT",
+        completed: "completed-HT",
+        startedAt: "Started at-HT",
+        edit: "Edit"
       }
     }
   },
