@@ -5,7 +5,7 @@ import { BarCodeScanner, Permissions } from "expo";
 import { AddPatient } from "../components/AddPatient";
 import { EditPatient } from "../components/EditPatient";
 import { EnterPatientId } from "../components/EnterPatientId";
-
+import { withNamespaces } from "react-i18next";
 import { ViewPatient } from "../components/ViewPatient";
 import { connect } from "react-redux";
 import { addPatient, editPatient } from "../state/actions";
@@ -18,7 +18,7 @@ const DisplayType = {
   ManualEntry: "ManualEntry"
 };
 
-class QrScreen extends React.Component {
+class QrScreenComponent extends React.Component {
   _isMounted = false;
   state = {
     hasCameraPermission: null,
@@ -29,7 +29,8 @@ class QrScreen extends React.Component {
 
   async componentDidMount() {
     this._isMounted = true;
-    const { status }: { status: string } = await Permissions.askAsync(
+    const { status } = await Permissions.askAsync(
+
       Permissions.CAMERA
     );
 
@@ -58,14 +59,15 @@ class QrScreen extends React.Component {
   };
 
   render() {
+    const { t } = this.props;
     const { editPatient } = this.props;
     const { hasCameraPermission, token, patient, display } = this.state;
 
     if (hasCameraPermission === null) {
-      return <Text>Requesting for camera permission</Text>;
+      return <Text>{t("qr:requesting")}</Text>;
     }
     if (hasCameraPermission === false) {
-      return <Text>No access to camera</Text>;
+      return <Text>{t("qr:noAccess")}</Text>;
     }
     return (
       <View style={styles.container}>
@@ -78,7 +80,7 @@ class QrScreen extends React.Component {
         <FAB
           style={styles.fab}
           icon="create"
-          label="Add manually"
+          label={t("qr:add")}
           onPress={this.handleEnterManually}
         />
         <Portal>
@@ -129,6 +131,8 @@ class QrScreen extends React.Component {
     this.setState({ display: DisplayType.ManualEntry });
 }
 
+//const QrScreen = withNamespaces("qr", { wait : true })(QrScreenComponent);
+
 const mapStateToProps = state => ({
   patients: state.patients.queue,
   user: state.user
@@ -139,10 +143,10 @@ const mapDispatchToProps = dispatch => ({
   editPatient: patient => dispatch(editPatient(patient))
 });
 
-export default connect(
+export default withNamespaces(["qr"], { wait : true })(connect(
   mapStateToProps,
   mapDispatchToProps
-)(QrScreen);
+)(QrScreenComponent));
 
 const styles = StyleSheet.create({
   container: { flex: 1 },

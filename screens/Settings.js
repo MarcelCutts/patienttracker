@@ -4,27 +4,28 @@ import { Title, Divider, TextInput, Button } from "react-native-paper";
 import { LanguageSelector } from "../components/LanguageSelector";
 import { connect } from "react-redux";
 import { uploadPatients, updateServerConfiguration } from "../state/actions";
+import { withNamespaces } from "react-i18next";
 
 export class SettingsComponent extends React.Component {
   state = { server: this.props.server };
 
   render() {
-    const { upload, updateServer } = this.props;
+    const { upload, updateServer, t } = this.props;
     const { server } = this.state;
 
     return (
       <View style={styles.container}>
         <View>
-          <Title>Language</Title>
+          <Title>{t("settings:language")}</Title>
           <LanguageSelector />
         </View>
         <Divider style={{ margin: 24 }} />
         <KeyboardAvoidingView behavior="padding" enabled>
-          <Title>Server details</Title>
+          <Title>{t("settings:details")}</Title>
           <TextInput
             mode="outlined"
             style={styles.input}
-            label="Address"
+            label={t("settings:address")}
             value={server.address}
             onChangeText={text =>
               this.setState({ server: { ...server, address: text } })
@@ -35,7 +36,7 @@ export class SettingsComponent extends React.Component {
           <TextInput
             mode="outlined"
             style={styles.input}
-            label="Password"
+            label={t("settings:password")}
             value={server.password}
             onChangeText={text =>
               this.setState({ server: { ...server, password: text } })
@@ -44,7 +45,7 @@ export class SettingsComponent extends React.Component {
           />
 
           <Button icon="save" mode="contained" onPress={upload}>
-            Upload
+            {t("settings:update")}
           </Button>
         </KeyboardAvoidingView>
       </View>
@@ -61,10 +62,12 @@ const mapDispatchToProps = dispatch => ({
   updateServer: config => dispatch(updateServerConfiguration(config))
 });
 
-export const SettingsScreen = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SettingsComponent);
+export const SettingsScreen = withNamespaces(["settings"], { wait: true })(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(SettingsComponent)
+);
 
 const styles = StyleSheet.create({
   container: {

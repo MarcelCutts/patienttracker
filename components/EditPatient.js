@@ -8,8 +8,9 @@ import {
   TextInput,
   Divider
 } from "react-native-paper";
+import { withNamespaces } from "react-i18next";
 
-export class EditPatient extends React.Component {
+export class EditPatientComponent extends React.Component {
   state = {
     comments: this.props.patient && this.props.patient.comments
   };
@@ -38,9 +39,10 @@ export class EditPatient extends React.Component {
 
   render() {
     const { visible, patient, hideDialog } = this.props;
+    const { t } = this.props;
     return (
       <Dialog visible={visible} onDismiss={hideDialog}>
-        <Dialog.Title>Edit patient?</Dialog.Title>
+        <Dialog.Title>{t("edit:editPatient")}</Dialog.Title>
         <Dialog.Content>
           <View style={styles.container}>
             <MaterialCommunityIcons name="qrcode" size={80} />
@@ -56,17 +58,17 @@ export class EditPatient extends React.Component {
         </Dialog.Content>
         <Divider />
         <Dialog.Actions style={styles.actions}>
-          <Button onPress={hideDialog}>Cancel</Button>
+          <Button onPress={hideDialog}>{t("edit:cancel")}</Button>
           <View style={styles.rightButtons}>
             <Button
               style={{ marginRight: 8 }}
               mode="outlined"
               onPress={this.updatePatient}
             >
-              Update
+              {t("edit:update")}
             </Button>
             <Button mode="contained" onPress={this.finishPatient}>
-              Finish
+              {t("edit:finish")}
             </Button>
           </View>
         </Dialog.Actions>
@@ -74,6 +76,8 @@ export class EditPatient extends React.Component {
     );
   }
 }
+
+export const EditPatient = withNamespaces("edit", { wait: true})(EditPatientComponent);
 
 const styles = StyleSheet.create({
   container: { flexDirection: "row", marginBottom: 8 },

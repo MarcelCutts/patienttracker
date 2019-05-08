@@ -1,6 +1,7 @@
 import * as React from "react";
 import { View, StyleSheet } from "react-native";
 import { Headline, Subheading } from "react-native-paper";
+import { withNamespaces } from "react-i18next";
 
 export const PatientsCard = ({ patients }) => {
   const completed = patients.filter(p => !!p.timeEnded).length;

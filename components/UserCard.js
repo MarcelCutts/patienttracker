@@ -39,7 +39,7 @@ export const UserCardComponent = ({ user, updateUser, t }) =>
     </Card>
   );
 
-export default withNamespaces("home", { wait: true })(UserCardComponent);
+export const UserCard = withNamespaces("home", { wait: true })(UserCardComponent);
 
 const styles = StyleSheet.create({
   content: {

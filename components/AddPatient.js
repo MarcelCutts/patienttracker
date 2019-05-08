@@ -10,6 +10,7 @@ import {
 } from "react-native-paper";
 import { addPatient } from "../state/actions";
 import { connect } from "react-redux";
+import { withNamespaces } from "react-i18next";
 
 export class AddPatientComponent extends React.Component {
   state = {
@@ -44,9 +45,10 @@ export class AddPatientComponent extends React.Component {
       completeDialog
     } = this.props;
     const { comments } = this.state;
+    const { t } = this.props;
     return (
       <Dialog visible={visible} onDismiss={hideDialog}>
-        <Dialog.Title>Add patient to queue?</Dialog.Title>
+        <Dialog.Title>{t("add:addHeader")}</Dialog.Title>
         <Dialog.Content>
           <View style={styles.container}>
             <MaterialCommunityIcons name="qrcode" size={80} />
@@ -55,14 +57,14 @@ export class AddPatientComponent extends React.Component {
 
           <TextInput
             mode="outlined"
-            label="Comments"
+            label={t("add:comments")}
             onChangeText={text => this.setState({ comments: text })}
             value={comments}
           />
         </Dialog.Content>
         <Divider />
         <Dialog.Actions>
-          <Button onPress={hideDialog}>Cancel</Button>
+          <Button onPress={hideDialog}>{t("add:cancel")}</Button>
           <Button
             onPress={() =>
               this.addPatient(
@@ -75,7 +77,7 @@ export class AddPatientComponent extends React.Component {
             }
             mode="contained"
           >
-            Add to queue
+            {t("add:addAction")}
           </Button>
         </Dialog.Actions>
       </Dialog>
@@ -91,10 +93,10 @@ const mapDispatchToProps = dispatch => ({
   dispatchAddPatient: patient => dispatch(addPatient(patient))
 });
 
-export const AddPatient = connect(
+export const AddPatient = withNamespaces(["add"], { wait : true })(connect(
   mapStateToProps,
   mapDispatchToProps
-)(AddPatientComponent);
+)(AddPatientComponent));
 
 const styles = StyleSheet.create({
   container: { flexDirection: "row", marginBottom: 8 },
