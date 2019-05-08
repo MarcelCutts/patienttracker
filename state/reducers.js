@@ -35,15 +35,14 @@ export const rootReducer = combineReducers({
   },
   server: (
     state = {
-      address: "",
-      password: "",
-      isFetching: false
+      address: "https://postman-echo.com/post",
+      password: "test"
     },
     action
   ) => {
     switch (action.type) {
-      case "UPDATE_CONFIGURATION":
-        return { ...state, password: action.password };
+      case "UPDATE_SERVER_CONFIGURATION":
+        return action.config;
       default:
         return state;
     }

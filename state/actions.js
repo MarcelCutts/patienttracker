@@ -30,12 +30,21 @@ export const sendPatientsFailure = error => ({
   error
 });
 
+export const updateServerConfiguration = config => ({
+  type: "UPDATE_SERVER_CONFIGURATION",
+  config
+});
+
 export const uploadPatients = () => {
   return (dispatch, getState) => {
+    const { patients, server } = getState();
     dispatch(sendPatientsRequest());
-    fetch("https://postman-echo.com/post", {
+    fetch(server.address, {
       method: "POST",
-      body: JSON.stringify(getState().patients.queue)
+      headers: {
+        Authorization: server.password
+      },
+      body: JSON.stringify(patients.queue)
     }).then(response => {
       if (response.status === 200) {
         dispatch(sendPatientsSuccess());
