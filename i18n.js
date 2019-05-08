@@ -53,10 +53,6 @@ i18n.use(languageDetector).init({
 
   debug: true,
 
-  // cache: {
-  //   enabled: true
-  // },
-
   interpolation: {
     escapeValue: false // not needed for react as it does escape per default to prevent xss!
   }
