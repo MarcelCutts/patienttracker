@@ -37,7 +37,7 @@ class HomeScreen extends React.Component {
 }
 const mapStateToProps = state => ({
   user: state.user,
-  patients: state.patients
+  patients: state.patients.queue
 });
 
 const mapDispatchToProps = dispatch => ({
