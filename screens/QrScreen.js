@@ -131,8 +131,6 @@ class QrScreenComponent extends React.Component {
     this.setState({ display: DisplayType.ManualEntry });
 }
 
-//const QrScreen = withNamespaces("qr", { wait : true })(QrScreenComponent);
-
 const mapStateToProps = state => ({
   patients: state.patients.queue,
   user: state.user
