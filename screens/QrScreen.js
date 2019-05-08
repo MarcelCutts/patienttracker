@@ -19,6 +19,7 @@ const DisplayType = {
 };
 
 class QrScreen extends React.Component {
+  _isMounted = false;
   state = {
     hasCameraPermission: null,
     token: null,
@@ -27,10 +28,18 @@ class QrScreen extends React.Component {
   };
 
   async componentDidMount() {
+    this._isMounted = true;
     const { status }: { status: string } = await Permissions.askAsync(
       Permissions.CAMERA
     );
-    this.setState({ hasCameraPermission: status === "granted" });
+
+    if (this._isMounted) {
+      this.setState({ hasCameraPermission: status === "granted" });
+    }
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
   }
 
   hideDialog = () => this.setState({ display: DisplayType.Scanner });
@@ -121,7 +130,7 @@ class QrScreen extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  patients: state.patients,
+  patients: state.patients.queue,
   user: state.user
 });
 
