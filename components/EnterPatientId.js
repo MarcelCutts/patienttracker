@@ -9,8 +9,7 @@ export class EnterPatientIdComponent extends React.Component {
   };
 
   render() {
-    const { t } = this.props;
-    const { visible, hideDialog, handlePatient } = this.props;
+    const { visible, hideDialog, handlePatient, t } = this.props;
     const { patientId } = this.state;
     return (
       <Dialog visible={visible} onDismiss={hideDialog}>

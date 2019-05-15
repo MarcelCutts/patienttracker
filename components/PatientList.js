@@ -20,17 +20,16 @@ export class PatientListCoponent extends React.Component {
   completeDialog = () => this.setState({ selectedPatient: null });
 
   render() {
-    const { patients, editPatient } = this.props;
+    const { patients, editPatient, t } = this.props;
     const { selectedPatient } = this.state;
-    const { t } = this.props;
     const inQueue = patients.filter(p => !p.timeEnded);
     return (
       <View style={styles.container}>
         <View style={styles.header}>
           <Headline>{t("home:patients")}</Headline>
           <Subheading>
-            {inQueue.length} {t("home:inQueue")} {patients.length - inQueue.length}{" "}
-            {t("home:completed")}
+            {inQueue.length} {t("home:inQueue")}{" "}
+            {patients.length - inQueue.length} {t("home:completed")}
           </Subheading>
         </View>
         <FlatList
@@ -75,7 +74,9 @@ export class PatientListCoponent extends React.Component {
   }
 }
 
-export const PatientList = withNamespaces("home", { wait: true })(PatientListCoponent);
+export const PatientList = withNamespaces("home", { wait: true })(
+  PatientListCoponent
+);
 
 const styles = StyleSheet.create({
   container: {
