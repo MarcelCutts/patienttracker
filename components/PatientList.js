@@ -9,8 +9,9 @@ import {
   Portal
 } from "react-native-paper";
 import { EditPatient } from "./EditPatient";
+import { withNamespaces } from "react-i18next";
 
-export class PatientList extends React.Component {
+export class PatientListCoponent extends React.Component {
   state = {
     selectedPatient: null
   };
@@ -19,16 +20,16 @@ export class PatientList extends React.Component {
   completeDialog = () => this.setState({ selectedPatient: null });
 
   render() {
-    const { patients, editPatient } = this.props;
+    const { patients, editPatient, t } = this.props;
     const { selectedPatient } = this.state;
     const inQueue = patients.filter(p => !p.timeEnded);
     return (
       <View style={styles.container}>
         <View style={styles.header}>
-          <Headline>Patients</Headline>
+          <Headline>{t("home:patients")}</Headline>
           <Subheading>
-            {inQueue.length} in queue, {patients.length - inQueue.length}{" "}
-            completed
+            {inQueue.length} {t("home:inQueue")}{" "}
+            {patients.length - inQueue.length} {t("home:completed")}
           </Subheading>
         </View>
         <FlatList
@@ -38,7 +39,7 @@ export class PatientList extends React.Component {
             <>
               <List.Item
                 title={item.id}
-                description={`Started at ${new Date(
+                description={`${t("home:startedAt")} ${new Date(
                   item.timeStarted
                 ).toLocaleTimeString()}`}
                 right={() => (
@@ -48,7 +49,7 @@ export class PatientList extends React.Component {
                     icon="edit"
                     onPress={() => this.setState({ selectedPatient: item })}
                   >
-                    edit
+                    {t("home:edit")}
                   </Button>
                 )}
               />
@@ -72,6 +73,10 @@ export class PatientList extends React.Component {
     );
   }
 }
+
+export const PatientList = withNamespaces("home", { wait: true })(
+  PatientListCoponent
+);
 
 const styles = StyleSheet.create({
   container: {
