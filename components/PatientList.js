@@ -20,10 +20,9 @@ export class PatientListComponent extends React.Component {
   completeDialog = () => this.setState({ selectedPatient: null });
 
   render() {
-    const { patients, editPatient } = this.props;
+    const { patients, editPatient, t } = this.props;
     const { selectedPatient } = this.state;
-    const { t } = this.props;
-    const inQueue = patients.filter(p => !p.timeEnded);
+    const inQueue = patients.filter(p => !p.timeFinished);
     return (
       <View style={styles.container}>
         <View style={styles.header}>

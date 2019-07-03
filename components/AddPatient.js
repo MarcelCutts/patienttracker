@@ -42,10 +42,10 @@ export class AddPatientComponent extends React.Component {
       user,
       hideDialog,
       dispatchAddPatient,
-      completeDialog
+      completeDialog,
+      t
     } = this.props;
     const { comments } = this.state;
-    const { t } = this.props;
     return (
       <Dialog visible={visible} onDismiss={hideDialog}>
         <Dialog.Title>{t("add:addHeader")}</Dialog.Title>
@@ -93,10 +93,12 @@ const mapDispatchToProps = dispatch => ({
   dispatchAddPatient: patient => dispatch(addPatient(patient))
 });
 
-export const AddPatient = withNamespaces(["add"], { wait : true })(connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(AddPatientComponent));
+export const AddPatient = withNamespaces(["add"], { wait: true })(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(AddPatientComponent)
+);
 
 const styles = StyleSheet.create({
   container: { flexDirection: "row", marginBottom: 8 },

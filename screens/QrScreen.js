@@ -29,10 +29,7 @@ class QrScreenComponent extends React.Component {
 
   async componentDidMount() {
     this._isMounted = true;
-    const { status } = await Permissions.askAsync(
-
-      Permissions.CAMERA
-    );
+    const { status } = await Permissions.askAsync(Permissions.CAMERA);
 
     if (this._isMounted) {
       this.setState({ hasCameraPermission: status === "granted" });
@@ -59,8 +56,7 @@ class QrScreenComponent extends React.Component {
   };
 
   render() {
-    const { t } = this.props;
-    const { editPatient } = this.props;
+    const { editPatient, t } = this.props;
     const { hasCameraPermission, token, patient, display } = this.state;
 
     if (hasCameraPermission === null) {
@@ -121,8 +117,8 @@ class QrScreenComponent extends React.Component {
   handlePatient = async ({ data }) => {
     const patient = this.props.patients.find(p => p.id === data);
     let display = DisplayType.AddPatient;
-    if (!!patient) display = DisplayType.EditPatient;
-    if (!!patient && !!patient.timeEnded) display = DisplayType.ViewPatient;
+    if (patient) display = DisplayType.EditPatient;
+    if (!!patient && !!patient.timeFinished) display = DisplayType.ViewPatient;
 
     this.setState({ patient, token: data, display });
   };
@@ -141,10 +137,12 @@ const mapDispatchToProps = dispatch => ({
   editPatient: patient => dispatch(editPatient(patient))
 });
 
-export default withNamespaces(["qr"], { wait : true })(connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(QrScreenComponent));
+export default withNamespaces(["qr"], { wait: true })(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(QrScreenComponent)
+);
 
 const styles = StyleSheet.create({
   container: { flex: 1 },
