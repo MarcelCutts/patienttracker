@@ -117,8 +117,8 @@ class QrScreenComponent extends React.Component {
   handlePatient = async ({ data }) => {
     const patient = this.props.patients.find(p => p.id === data);
     let display = DisplayType.AddPatient;
-    if (!!patient) display = DisplayType.EditPatient;
-    if (!!patient && !!patient.timeEnded) display = DisplayType.ViewPatient;
+    if (patient) display = DisplayType.EditPatient;
+    if (!!patient && !!patient.timeFinished) display = DisplayType.ViewPatient;
 
     this.setState({ patient, token: data, display });
   };

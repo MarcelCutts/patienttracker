@@ -22,7 +22,7 @@ export class PatientListCoponent extends React.Component {
   render() {
     const { patients, editPatient, t } = this.props;
     const { selectedPatient } = this.state;
-    const inQueue = patients.filter(p => !p.timeEnded);
+    const inQueue = patients.filter(p => !p.timeFinished);
     return (
       <View style={styles.container}>
         <View style={styles.header}>

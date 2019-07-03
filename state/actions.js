@@ -41,9 +41,6 @@ export const uploadPatients = () => {
     dispatch(sendPatientsRequest());
     fetch(server.address, {
       method: "POST",
-      headers: {
-        Authorization: server.password
-      },
       body: JSON.stringify(patients.queue)
     }).then(response => {
       if (response.status === 200) {

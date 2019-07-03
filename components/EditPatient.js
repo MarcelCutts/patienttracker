@@ -30,7 +30,7 @@ export class EditPatientComponent extends React.Component {
     const { patient, editPatient, completeDialog } = this.props;
     const finishedPatient = {
       ...patient,
-      timeEnded: Date.now()
+      timeFinished: Date.now()
     };
 
     editPatient(finishedPatient);
@@ -77,7 +77,9 @@ export class EditPatientComponent extends React.Component {
   }
 }
 
-export const EditPatient = withNamespaces("edit", { wait: true})(EditPatientComponent);
+export const EditPatient = withNamespaces("edit", { wait: true })(
+  EditPatientComponent
+);
 
 const styles = StyleSheet.create({
   container: { flexDirection: "row", marginBottom: 8 },
