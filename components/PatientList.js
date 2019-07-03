@@ -11,7 +11,7 @@ import {
 import { EditPatient } from "./EditPatient";
 import { withNamespaces } from "react-i18next";
 
-export class PatientListCoponent extends React.Component {
+export class PatientListComponent extends React.Component {
   state = {
     selectedPatient: null
   };
@@ -29,8 +29,8 @@ export class PatientListCoponent extends React.Component {
         <View style={styles.header}>
           <Headline>{t("home:patients")}</Headline>
           <Subheading>
-            {inQueue.length} {t("home:inQueue")} {patients.length - inQueue.length}{" "}
-            {t("home:completed")}
+            {inQueue.length} {t("home:inQueue")}{" "}
+            {patients.length - inQueue.length} {t("home:completed")}
           </Subheading>
         </View>
         <FlatList
@@ -75,7 +75,9 @@ export class PatientListCoponent extends React.Component {
   }
 }
 
-export const PatientList = withNamespaces("home", { wait: true })(PatientListCoponent);
+export const PatientList = withNamespaces("home", { wait: true })(
+  PatientListComponent
+);
 
 const styles = StyleSheet.create({
   container: {
