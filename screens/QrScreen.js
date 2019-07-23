@@ -1,7 +1,8 @@
 import * as React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { FAB, Portal } from "react-native-paper";
-import { BarCodeScanner, Permissions } from "expo";
+import * as Permissions from 'expo-permissions';
+import { BarCodeScanner } from 'expo-barcode-scanner';
 import { AddPatient } from "../components/AddPatient";
 import { EditPatient } from "../components/EditPatient";
 import { EnterPatientId } from "../components/EnterPatientId";

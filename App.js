@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Platform, StatusBar, StyleSheet, View } from "react-native";
-import { AppLoading, Font } from "expo";
+import { AppLoading } from "expo";
+import * as Font from 'expo-font';
 import AppNavigator from "./navigation/AppNavigator";
 import { withNamespaces, I18nextProvider } from "react-i18next";
 import { Provider as PaperProvider } from "react-native-paper";
