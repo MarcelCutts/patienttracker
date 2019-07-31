@@ -10,7 +10,11 @@ import {
 } from "react-native-paper";
 import { EditPatient } from "./EditPatient";
 
+<<<<<<< HEAD
 export class PatientList extends React.Component {
+=======
+export class PatientListComponent extends React.Component {
+>>>>>>> 17c7f99619f0d4f405d364ee0f94377aa796caa3
   state = {
     selectedPatient: null
   };
@@ -73,6 +77,13 @@ export class PatientList extends React.Component {
   }
 }
 
+<<<<<<< HEAD
+=======
+export const PatientList = withNamespaces("home", { wait: true })(
+  PatientListComponent
+);
+
+>>>>>>> 17c7f99619f0d4f405d364ee0f94377aa796caa3
 const styles = StyleSheet.create({
   container: {
     flex: 1
