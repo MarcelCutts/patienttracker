@@ -39,8 +39,6 @@ i18n.use(languageDetector).init({
         completed: "completed",
         startedAt: "Started at",
         edit: "Edit"
-<<<<<<< HEAD
-=======
       },
       edit: {
         editPatient: "Edit patient?",
@@ -76,53 +74,32 @@ i18n.use(languageDetector).init({
         completedPatient: "Completed patient",
         comments: "Comments",
         back: "Back"
->>>>>>> 17c7f99619f0d4f405d364ee0f94377aa796caa3
       }
     },
     ht: {
       signIn: {
-<<<<<<< HEAD
-        title: "Tanpri, antre detay yo.", // This is "Please enter your details" so needs more work
-        signIn: "Sove", // Technically "save"
-        name: "itilizatè",
-        stationId: "id estasyon",
-        facilityId: "id klinik",
-        error: "Tanpri, antre detay yo."
-      },
-      home: {
-        title: "Patient tracker-HT",
-        home: "Home-HT",
-        station: "Estasyon",
-        facility: "Klinik",
-        update: "Aktyalizasyon",
-        patients: "Patients-HT",
-        inQueue: "in queue-HT",
-        completed: "completed-HT",
-        startedAt: "Started at-HT",
-        edit: "Edit"
-=======
         title: "Tanpri konekte.",
         signIn: "Konekte",
         name: "Non",
-        stationId: "Non seksyon/zòn",
+        stationId: "Non seksyon",
         facilityId: "Seksyon pou ede",
         error: "Tanpri antre tout detay yo."
       },
       home: {
         title: "Chèche pasyan",
         home: "Akèy",
-        station: "Pòs, plas",
-        facility: "Asistans / Èd",
+        station: "Pòs",
+        facility: "Èd",
         update: "Aktyalize",
         patients: "Pasyan",
         inQueue: "annatant,",
         completed: "fini",
-        startedAt: "Te Komanse le / nan",
+        startedAt: "Te Komanse le",
         edit: "Chanje"
       },
       edit: {
         editPatient: "Chanje enfomasyon pasyan?",
-        cancel: "Anile / Efase",
+        cancel: "Anile",
         update: "Aktyalize",
         finish: "Fini"
       },
@@ -141,20 +118,19 @@ i18n.use(languageDetector).init({
       enter: {
         enterID: "Rantre kòd pasyan?",
         id: "Kòd pasyan",
-        cancel: "Anile / Efase",
+        cancel: "Anile",
         continue: "Kontinye"
       },
       add: {
         addHeader: "Mete pasyan sou lis atant?",
         comments: "Komantè",
-        cancel: "Anile / Efase",
+        cancel: "Anile",
         addAction: "Mete sou atant"
       },
       complete: {
         completedPatient: "Swivi pasyan fini",
         comments: "Komantè",
         back: "Tounen"
->>>>>>> 17c7f99619f0d4f405d364ee0f94377aa796caa3
       }
     },
     fr: {
@@ -169,13 +145,13 @@ i18n.use(languageDetector).init({
       home: {
         title: "Localiser le patient",
         home: "Accueil",
-        station: "Poste / Section",
-        facility: "Assistance / Aide",
+        station: "Poste",
+        facility: "Aide",
         update: "Actualiser",
         patients: "Patient",
         inQueue: "en cours,",
         completed: "terminé",
-        startedAt: "A commencer le/à",
+        startedAt: "A commencer à",
         edit: "Modifier"
       },
       edit: {
