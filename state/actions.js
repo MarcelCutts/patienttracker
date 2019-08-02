@@ -41,11 +41,16 @@ export const uploadPatients = () => {
     dispatch(sendPatientsRequest());
     fetch(server.address, {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
       body: JSON.stringify(patients.queue)
-    }).then(response => {
-      if (response.status === 200) {
-        dispatch(sendPatientsSuccess());
-      }
-    });
+    })
+      .then(response => {
+        if (response.status === 200) {
+          dispatch(sendPatientsSuccess());
+        }
+      })
+      .catch(error => console.log(error));
   };
 };

@@ -15,6 +15,6 @@ export class HeaderComponent extends React.Component {
       </Appbar.Header>
     );
   }
-};
+}
 
 export default withNamespaces("home", { wait: true })(HeaderComponent);
