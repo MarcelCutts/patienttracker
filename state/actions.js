@@ -25,8 +25,8 @@ export const sendPatientsSuccess = () => ({
   type: "SEND_PATIENTS_SUCCESS"
 });
 
-export const sendPatientsFailure = error => ({
-  type: "SEND_PATIENTS_FAILURE",
+export const sendPatientsError = error => ({
+  type: "SEND_PATIENTS_ERROR",
   error
 });
 
@@ -38,6 +38,7 @@ export const updateServerConfiguration = config => ({
 export const uploadPatients = () => {
   return (dispatch, getState) => {
     const { patients, server } = getState();
+    console.log("🚨", server);
     dispatch(sendPatientsRequest());
     fetch(server.address, {
       method: "POST",
@@ -50,6 +51,9 @@ export const uploadPatients = () => {
       .then(response => {
         if (response.status === 200) {
           dispatch(sendPatientsSuccess());
+        } else {
+          console.log("🚛", response);
+          dispatch(sendPatientsError(response.body));
         }
       })
       .catch(error => console.log("💥", error));

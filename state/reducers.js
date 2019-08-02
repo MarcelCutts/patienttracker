@@ -19,6 +19,14 @@ export const rootReducer = combineReducers({
         return { ...state, isFetching: true };
       case "SEND_PATIENTS_SUCCESS":
         return { ...state, queue: [], isFetching: false };
+      case "SEND_PATEINTS_ERROR": {
+        return {
+          ...state,
+          queue: [],
+          isFetching: false,
+          error: action.payload
+        };
+      }
       default:
         return state;
     }
