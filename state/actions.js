@@ -42,7 +42,8 @@ export const uploadPatients = () => {
     fetch(server.address, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        authorization: server.password
       },
       body: JSON.stringify(patients.queue)
     })
@@ -51,6 +52,6 @@ export const uploadPatients = () => {
           dispatch(sendPatientsSuccess());
         }
       })
-      .catch(error => console.log(error));
+      .catch(error => console.log("💥", error));
   };
 };
