@@ -7,11 +7,8 @@ import { uploadPatients, updateServerConfiguration } from "../state/actions";
 import { withNamespaces } from "react-i18next";
 
 export class SettingsComponent extends React.Component {
-  state = { server: this.props.server };
-
   render() {
-    const { upload, updateServer, t } = this.props;
-    const { server } = this.state;
+    const { server, upload, updateServer, t } = this.props;
 
     return (
       <View style={styles.container}>
@@ -27,10 +24,7 @@ export class SettingsComponent extends React.Component {
             style={styles.input}
             label={t("settings:address")}
             value={server.address}
-            onChangeText={text =>
-              this.setState({ server: { ...server, address: text } })
-            }
-            onBlur={() => updateServer(this.state.server)}
+            onChangeText={text => updateServer({ ...server, address: text })}
           />
 
           <TextInput
@@ -38,10 +32,7 @@ export class SettingsComponent extends React.Component {
             style={styles.input}
             label={t("settings:password")}
             value={server.password}
-            onChangeText={text =>
-              this.setState({ server: { ...server, password: text } })
-            }
-            onBlur={() => updateServer(this.state.server)}
+            onChangeText={text => updateServer({ ...server, password: text })}
           />
 
           <Button icon="save" mode="contained" onPress={upload}>
