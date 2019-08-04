@@ -54,19 +54,16 @@ export const uploadPatients = () => {
           case 200:
             return dispatch(sendPatientsSuccess(completedPatients));
           case 403:
-            return dispatch(sendPatientsError("Incorrect password"));
+            return dispatch(sendPatientsError("settings:incorrectPassword"));
           case 404:
-            return dispatch(
-              sendPatientsError("Could not find server at that address")
-            );
+            return dispatch(sendPatientsError("settings:couldNotFind"));
           default:
-            return dispatch(
-              sendPatientsError(
-                "An error occured. Ensure you are connected to the internet and check above details"
-              )
-            );
+            return dispatch(sendPatientsError("settings:genericError"));
         }
       })
-      .catch(error => console.log("💥", error));
+      .catch(error => {
+        console.log("💥", error);
+        dispatch(sendPatientsError("settings:genericError"));
+      });
   };
 };

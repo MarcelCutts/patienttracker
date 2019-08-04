@@ -52,7 +52,13 @@ i18n.use(languageDetector).init({
         address: "Address",
         password: "Password",
         update: "Update",
-        upload: "Upload"
+        patientsCompleted: "completed patients ready to upload",
+        upload: "Upload",
+        uploading: "Uploading",
+        incorrectPassword: "Incorrect password",
+        couldNotFind: "Could not find server at that address",
+        genericError:
+          "An error occured. Ensure you are connected to the internet and check above details"
       },
       qr: {
         add: "Add manually",
@@ -79,59 +85,116 @@ i18n.use(languageDetector).init({
     },
     ht: {
       signIn: {
-        title: "Tanpri ouvri sesyon.",
-        signIn: "Anrijistre",
-        name: "Nom et siyati",
-        stationId: "id estasyon",
-        facilityId: "id klinik",
+        title: "Tanpri konekte.",
+        signIn: "Konekte",
+        name: "Non",
+        stationId: "Non seksyon",
+        facilityId: "Seksyon pou ede",
         error: "Tanpri antre tout detay yo."
       },
       home: {
-        title: "Suivi pasyan an",
+        title: "Chèche pasyan",
         home: "Akèy",
-        station: "Estasyon",
-        facility: "Klinik",
-        update: "Aktyalizasyon",
-        patients: "Pasyan yo",
-        inQueue: "ki ap tan,",
-        completed: "fini", // translation wasn't in creole dictionary, confirm with Vanessa
-        startedAt: "Komanse a",
+        station: "Pòs",
+        facility: "Èd",
+        update: "Aktyalize",
+        patients: "Pasyan",
+        inQueue: "annatant,",
+        completed: "fini",
+        startedAt: "Te Komanse le",
         edit: "Chanje"
       },
       edit: {
-        editPatient: "Chanje pasyan?",
-        cancel: "Anulè",
-        update: "Aktyalizasyon",
+        editPatient: "Chanje enfomasyon pasyan?",
+        cancel: "Anile",
+        update: "Aktyalize",
         finish: "Fini"
       },
       settings: {
-        language: "Langaj",
-        details: "Detay sou sèvè a",
-        address: "Adres",
-        password: "Mod pas",
-        update: "Mete a jou"
+        language: "Lang",
+        details: "Detay sèvè",
+        address: "Adrès",
+        password: "Kòd sekrè",
+        update: "Aktyalize"
       },
       qr: {
-        add: "Ajoute manyèlman",
-        requesting: "Mande pou itilize kamera",
-        noAccess: "Pa gen aksè ak kamera"
+        add: "Rantre ak men",
+        requesting: "Mande otorizasyon kamera",
+        noAccess: "Pa gen aksè pou kamera"
       },
       enter: {
-        enterID: "Antre NIH?",
-        id: "NIH",
-        cancel: "Anulè",
+        enterID: "Rantre kòd pasyan?",
+        id: "Kòd pasyan",
+        cancel: "Anile",
         continue: "Kontinye"
       },
       add: {
-        addHeader: "Ajoute pasyan nan lis datant?",
-        comments: "Kòmantè",
-        cancel: "Anulè",
-        addAction: "Ajoute nan lis datant"
+        addHeader: "Mete pasyan sou lis atant?",
+        comments: "Komantè",
+        cancel: "Anile",
+        addAction: "Mete sou atant"
       },
       complete: {
-        completedPatient: "Fini ak pasyan",
-        comments: "Kòmantè",
+        completedPatient: "Swivi pasyan fini",
+        comments: "Komantè",
         back: "Tounen"
+      }
+    },
+    fr: {
+      signIn: {
+        title: "Connecter s’il vous plait.",
+        signIn: "Se connecter",
+        name: "Nom",
+        stationId: "Nom du poste",
+        facilityId: "Bureau d’assistance",
+        error: "Veuillez-vous entrer tous les détails, s'il vous plait."
+      },
+      home: {
+        title: "Localiser le patient",
+        home: "Accueil",
+        station: "Poste",
+        facility: "Aide",
+        update: "Actualiser",
+        patients: "Patient",
+        inQueue: "en cours,",
+        completed: "terminé",
+        startedAt: "A commencer à",
+        edit: "Modifier"
+      },
+      edit: {
+        editPatient: "Modifier informations patient?",
+        cancel: "Annuler",
+        update: "Actualiser",
+        finish: "Terminer"
+      },
+      settings: {
+        language: "Langue",
+        details: "Détails du serveur",
+        address: "Adresse",
+        password: "Mot de passe",
+        update: "Actualiser"
+      },
+      qr: {
+        add: "Compléter manuellement",
+        requesting: "Demander l’autorisation de la caméra",
+        noAccess: "Pas d’accès à la caméra"
+      },
+      enter: {
+        enterID: "Insérer code patient?",
+        id: "Code patient",
+        cancel: "Annuler",
+        continue: "Continuer"
+      },
+      add: {
+        addHeader: "Ajouter le patient à la liste d’attente?",
+        comments: "Commentaires",
+        cancel: "Annuler",
+        addAction: "Ajouter à la liste d’attente"
+      },
+      complete: {
+        completedPatient: "Suivi du patient terminé",
+        comments: "Commentaires",
+        back: "Retour"
       }
     }
   },

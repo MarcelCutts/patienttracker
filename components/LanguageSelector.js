@@ -11,6 +11,7 @@ export const LanguageDropdown = ({ i18n }) => (
   >
     <Picker.Item label="Kreyòl 🇭🇹" value="ht" />
     <Picker.Item label="English 🇬🇧" value="en" />
+    <Picker.Item label="Français 🇫🇷" value="fr" />
   </Picker>
 );
 
@@ -20,7 +21,7 @@ export const LanguageSelector = withNamespaces(["common"], { wait: true })(
 
 const styles = StyleSheet.create({
   container: {
-    width: 140,
+    width: 150,
     height: 50
   }
 });

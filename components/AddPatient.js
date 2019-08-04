@@ -101,9 +101,5 @@ export const AddPatient = withNamespaces(["add"], { wait: true })(
 );
 
 const styles = StyleSheet.create({
-  container: { flexDirection: "row", marginBottom: 8 },
-  manualInput: { flex: 1 },
-  actions: {
-    justifyContent: "space-between"
-  }
+  container: { flexDirection: "row", marginBottom: 8 }
 });

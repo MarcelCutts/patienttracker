@@ -37,12 +37,10 @@ export class EnterPatientIdComponent extends React.Component {
   }
 }
 
-export const EnterPatientId = withNamespaces("enter", { wait: true})(EnterPatientIdComponent);
+export const EnterPatientId = withNamespaces("enter", { wait: true })(
+  EnterPatientIdComponent
+);
 
 const styles = StyleSheet.create({
-  container: {
-    flexDirection: "row",
-    marginBottom: 8
-  },
   actions: { marginHorizontal: 16, justifyContent: "space-between" }
 });

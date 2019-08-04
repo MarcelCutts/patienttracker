@@ -32,7 +32,7 @@ export const SettingsComponent = ({
     <KeyboardAvoidingView behavior="padding" enabled>
       <Title>{t("settings:details")}</Title>
       <Subheading>
-        {completedPatients.length} completed patients ready to upload
+        {completedPatients.length} {t("settings:patientsCompleted")}
       </Subheading>
 
       <View style={styles.upload}>
@@ -54,7 +54,7 @@ export const SettingsComponent = ({
 
         {isFetching ? (
           <Button icon="schedule" mode="contained" disabled={true}>
-            Uploading...
+            {t("settings:uploading")}
           </Button>
         ) : (
           <Button
@@ -69,7 +69,7 @@ export const SettingsComponent = ({
 
         {error ? (
           <Text type="error" style={styles.errorMessage}>
-            {error}
+            {t(error)}
           </Text>
         ) : null}
       </View>
