@@ -1,5 +1,5 @@
 import i18n from "i18next";
-import { Localization } from "expo-localization";
+import * as Localization from "expo-localization";
 
 // creating a language detection plugin using expo
 // http://i18next.com/docs/ownplugin/#languagedetector
@@ -7,7 +7,7 @@ const languageDetector = {
   type: "languageDetector",
   async: true, // flags below detection to be async
   detect: callback => {
-    return /*'en'; */ Localization.getLocalizationAsync().then(({ locale }) => {
+    return Localization.getLocalizationAsync().then(({ locale }) => {
       callback(locale);
     });
   },

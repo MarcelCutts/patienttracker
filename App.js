@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Platform, StatusBar, StyleSheet, View } from "react-native";
-import { AppLoading, Font } from "expo";
+import { AppLoading } from "expo";
+import * as Font from "expo-font";
 import AppNavigator from "./navigation/AppNavigator";
 import { withNamespaces, I18nextProvider } from "react-i18next";
 import { Provider as PaperProvider } from "react-native-paper";
@@ -8,6 +9,7 @@ import i18n from "./i18n";
 import configureStore from "./state/configureStore";
 import { PersistGate } from "redux-persist/integration/react";
 import { Provider } from "react-redux";
+import { MaterialIcons } from "@expo/vector-icons";
 
 const navigationPersistenceKey = __DEV__ ? "NavigationStateDEV" : null;
 const WrappedStack = ({ t }) => (
@@ -55,9 +57,11 @@ export default class App extends React.Component {
   }
 
   _loadResourcesAsync = async () =>
-    Font.loadAsync({
-      MaterialIcons: require("@expo/vector-icons/fonts/MaterialIcons.ttf")
-    });
+    await Promise.all([
+      Font.loadAsync({
+        ...MaterialIcons.font
+      })
+    ]);
 
   _handleLoadingError = error => {
     // In this case, you might want to report the error to your error
