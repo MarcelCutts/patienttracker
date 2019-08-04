@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@expo/samples": "2.1.1",
-    "expo": "^33.0.0",
+    "expo": "^34.0.1",
     "expo-asset": "^6.0.0",
     "expo-barcode-scanner": "~5.0.1",
     "expo-constants": "~5.0.1",
