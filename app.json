@@ -1,16 +1,20 @@
 {
   "expo": {
-    "name": "patienttracker",
+    "name": "Patient Tracker",
     "slug": "patienttracker",
     "privacy": "public",
     "sdkVersion": "32.0.0",
     "android": {
-      "package": "com.gheskio.patienttracker"
+      "package": "com.gheskio.patienttracker",
+      "adaptiveIcon": {
+        "backgroundColor": "#3D505A",
+        "foregroundImage": "./assets/images/androidicon.png"
+      }
     },
     "platforms": ["ios", "android"],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/androidicon.png",
     "splash": {
       "image": "./assets/images/gheskisplash.png",
       "resizeMode": "cover",
