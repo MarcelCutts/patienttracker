@@ -7,7 +7,7 @@
     "android": {
       "package": "com.gheskio.patienttracker",
       "adaptiveIcon": {
-        "backgroundColor": "#3D505A",
+        "backgroundColor": "#ffffff",
         "foregroundImage": "./assets/images/androidicon.png"
       }
     },
