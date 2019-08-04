@@ -62,6 +62,7 @@ export const uploadPatients = () => {
         }
       })
       .catch(error => {
+        // eslint-disable-next-line no-console
         console.log("💥", error);
         dispatch(sendPatientsError("settings:genericError"));
       });

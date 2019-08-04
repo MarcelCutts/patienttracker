@@ -31,7 +31,7 @@ export const UserCardComponent = ({ user, updateUser, t }) =>
           </Text>
         </View>
       </Card.Content>
-      <Card.Actions style={{ alignSelf: "flex-end" }}>
+      <Card.Actions style={styles.cardAction}>
         <Button icon="update" onPress={updateUser}>
           {t("home:update")}
         </Button>
@@ -39,12 +39,17 @@ export const UserCardComponent = ({ user, updateUser, t }) =>
     </Card>
   );
 
-export const UserCard = withNamespaces("home", { wait: true })(UserCardComponent);
+export const UserCard = withNamespaces("home", { wait: true })(
+  UserCardComponent
+);
 
 const styles = StyleSheet.create({
   content: {
     flexDirection: "row",
     marginBottom: 8
+  },
+  cardAction: {
+    alignSelf: "flex-end"
   },
   userIcon: {
     paddingRight: 12,
