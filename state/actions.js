@@ -61,6 +61,9 @@ export const uploadPatients = () => {
             return dispatch(sendPatientsError("settings:genericError"));
         }
       })
-      .catch(error => console.log("💥", error));
+      .catch(error => {
+        console.log("💥", error);
+        dispatch(sendPatientsError("settings:genericError"));
+      });
   };
 };
