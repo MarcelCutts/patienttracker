@@ -44,7 +44,7 @@ export class PatientListCoponent extends React.Component {
                 ).toLocaleTimeString()}`}
                 right={() => (
                   <Button
-                    style={{ alignSelf: "center" }}
+                    style={styles.button}
                     mode="outlined"
                     icon="edit"
                     onPress={() => this.setState({ selectedPatient: item })}
@@ -85,7 +85,5 @@ const styles = StyleSheet.create({
   header: {
     marginLeft: 16
   },
-  item: {
-    margin: 5
-  }
+  button: { alignSelf: "center" }
 });

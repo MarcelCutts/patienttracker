@@ -11,7 +11,7 @@ class UserLoadingScreenComponent extends React.Component {
   bootstrapAsync = () => {
     const { user, navigation } = this.props;
 
-    navigation.navigate(!!user ? "Home" : "UserSignIn");
+    navigation.navigate(user ? "Home" : "UserSignIn");
   };
 
   render() {

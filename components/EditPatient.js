@@ -61,7 +61,7 @@ export class EditPatientComponent extends React.Component {
           <Button onPress={hideDialog}>{t("edit:cancel")}</Button>
           <View style={styles.rightButtons}>
             <Button
-              style={{ marginRight: 8 }}
+              style={styles.updateButton}
               mode="outlined"
               onPress={this.updatePatient}
             >
@@ -84,5 +84,6 @@ export const EditPatient = withNamespaces("edit", { wait: true })(
 const styles = StyleSheet.create({
   container: { flexDirection: "row", marginBottom: 8 },
   actions: { marginHorizontal: 16, justifyContent: "space-between" },
-  rightButtons: { flexDirection: "row" }
+  rightButtons: { flexDirection: "row" },
+  updateButton: { marginRight: 8 }
 });
