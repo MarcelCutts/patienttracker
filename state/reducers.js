@@ -16,9 +16,22 @@ export const rootReducer = combineReducers({
           })
         };
       case "SEND_PATIENTS_REQUEST":
-        return { ...state, isFetching: true };
-      case "SEND_PATIENTS_SUCCESS":
-        return { ...state, queue: [], isFetching: false };
+        return { ...state, isFetching: true, error: null };
+      case "SEND_PATIENTS_SUCCESS": {
+        const uploadedIds = action.patients.map(p => p.id);
+        return {
+          ...state,
+          queue: state.queue.filter(p => !uploadedIds.includes(p.id)),
+          isFetching: false
+        };
+      }
+      case "SEND_PATIENTS_ERROR": {
+        return {
+          ...state,
+          isFetching: false,
+          error: action.error
+        };
+      }
       default:
         return state;
     }
@@ -35,8 +48,8 @@ export const rootReducer = combineReducers({
   },
   server: (
     state = {
-      address: "https://postman-echo.com/post",
-      password: "test"
+      address: "https://whispering-meadow-82942.herokuapp.com/patients",
+      password: "secret"
     },
     action
   ) => {

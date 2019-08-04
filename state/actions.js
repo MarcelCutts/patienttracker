@@ -21,12 +21,13 @@ export const sendPatientsRequest = () => ({
   type: "SEND_PATIENTS_REQUEST"
 });
 
-export const sendPatientsSuccess = () => ({
-  type: "SEND_PATIENTS_SUCCESS"
+export const sendPatientsSuccess = patients => ({
+  type: "SEND_PATIENTS_SUCCESS",
+  patients
 });
 
-export const sendPatientsFailure = error => ({
-  type: "SEND_PATIENTS_FAILURE",
+export const sendPatientsError = error => ({
+  type: "SEND_PATIENTS_ERROR",
   error
 });
 
@@ -38,19 +39,36 @@ export const updateServerConfiguration = config => ({
 export const uploadPatients = () => {
   return (dispatch, getState) => {
     const { patients, server } = getState();
+    const completedPatients = patients.queue.filter(p => p.timeFinished);
+    console.log("🚨", server);
     dispatch(sendPatientsRequest());
     fetch(server.address, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        authorization: server.password
       },
-      body: JSON.stringify(patients.queue)
+      body: JSON.stringify(completedPatients)
     })
       .then(response => {
-        if (response.status === 200) {
-          dispatch(sendPatientsSuccess());
+        console.log("🏂", response);
+        switch (response.status) {
+          case 200:
+            return dispatch(sendPatientsSuccess(completedPatients));
+          case 403:
+            return dispatch(sendPatientsError("Incorrect password"));
+          case 404:
+            return dispatch(
+              sendPatientsError("Could not find server at that address")
+            );
+          default:
+            return dispatch(
+              sendPatientsError(
+                "An error occured. Ensure you are connected to the internet and check above details"
+              )
+            );
         }
       })
-      .catch(error => console.log(error));
+      .catch(error => console.log("💥", error));
   };
 };

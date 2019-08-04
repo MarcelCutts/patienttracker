@@ -1,60 +1,87 @@
 import * as React from "react";
 import { View, StyleSheet, KeyboardAvoidingView } from "react-native";
-import { Title, Divider, TextInput, Button } from "react-native-paper";
+import {
+  Title,
+  Divider,
+  TextInput,
+  Button,
+  Text,
+  Subheading,
+  DefaultTheme
+} from "react-native-paper";
 import { LanguageSelector } from "../components/LanguageSelector";
 import { connect } from "react-redux";
 import { uploadPatients, updateServerConfiguration } from "../state/actions";
 import { withNamespaces } from "react-i18next";
 
-export class SettingsComponent extends React.Component {
-  state = { server: this.props.server };
+export const SettingsComponent = ({
+  server,
+  error,
+  isFetching,
+  upload,
+  updateServer,
+  completedPatients,
+  t
+}) => (
+  <View style={styles.container}>
+    <View>
+      <Title>{t("settings:language")}</Title>
+      <LanguageSelector />
+    </View>
+    <Divider style={styles.divider} />
+    <KeyboardAvoidingView behavior="padding" enabled>
+      <Title>{t("settings:details")}</Title>
+      <Subheading>
+        {completedPatients.length} completed patients ready to upload
+      </Subheading>
 
-  render() {
-    const { upload, updateServer, t } = this.props;
-    const { server } = this.state;
+      <View style={styles.upload}>
+        <TextInput
+          mode="outlined"
+          style={styles.input}
+          label={t("settings:address")}
+          value={server.address}
+          onChangeText={text => updateServer({ ...server, address: text })}
+        />
 
-    return (
-      <View style={styles.container}>
-        <View>
-          <Title>{t("settings:language")}</Title>
-          <LanguageSelector />
-        </View>
-        <Divider style={{ margin: 24 }} />
-        <KeyboardAvoidingView behavior="padding" enabled>
-          <Title>{t("settings:details")}</Title>
-          <TextInput
-            mode="outlined"
-            style={styles.input}
-            label={t("settings:address")}
-            value={server.address}
-            onChangeText={text =>
-              this.setState({ server: { ...server, address: text } })
-            }
-            onBlur={() => updateServer(this.state.server)}
-          />
+        <TextInput
+          mode="outlined"
+          style={styles.input}
+          label={t("settings:password")}
+          value={server.password}
+          onChangeText={text => updateServer({ ...server, password: text })}
+        />
 
-          <TextInput
-            mode="outlined"
-            style={styles.input}
-            label={t("settings:password")}
-            value={server.password}
-            onChangeText={text =>
-              this.setState({ server: { ...server, password: text } })
-            }
-            onBlur={() => updateServer(this.state.server)}
-          />
-
-          <Button icon="save" mode="contained" onPress={upload}>
-            {t("settings:update")}
+        {isFetching ? (
+          <Button icon="schedule" mode="contained" disabled={true}>
+            Uploading...
           </Button>
-        </KeyboardAvoidingView>
+        ) : (
+          <Button
+            icon="save"
+            mode="contained"
+            onPress={upload}
+            disabled={completedPatients.length === 0}
+          >
+            {t("settings:upload")}
+          </Button>
+        )}
+
+        {error ? (
+          <Text type="error" style={styles.errorMessage}>
+            {error}
+          </Text>
+        ) : null}
       </View>
-    );
-  }
-}
+    </KeyboardAvoidingView>
+  </View>
+);
 
 const mapStateToProps = state => ({
-  server: state.server
+  server: state.server,
+  isFetching: state.patients.isFetching,
+  error: state.patients.error,
+  completedPatients: state.patients.queue.filter(p => p.timeFinished)
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -69,11 +96,21 @@ export const SettingsScreen = withNamespaces(["settings"], { wait: true })(
   )(SettingsComponent)
 );
 
+// TODO: Change theme usage to be from provider
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
     padding: 24
+  },
+  divider: {
+    margin: 24
+  },
+  upload: {
+    marginTop: 16
+  },
+  errorMessage: {
+    color: DefaultTheme.colors.error
   },
   input: {
     marginBottom: 16,

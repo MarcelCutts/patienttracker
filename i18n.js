@@ -51,7 +51,8 @@ i18n.use(languageDetector).init({
         details: "Server details",
         address: "Address",
         password: "Password",
-        update: "Update"
+        update: "Update",
+        upload: "Upload"
       },
       qr: {
         add: "Add manually",
@@ -63,7 +64,7 @@ i18n.use(languageDetector).init({
         id: "Patient ID",
         cancel: "Cancel",
         continue: "Continue"
-      }, 
+      },
       add: {
         addHeader: "Add patient to queue?",
         comments: "Comments",
@@ -78,8 +79,8 @@ i18n.use(languageDetector).init({
     },
     ht: {
       signIn: {
-        title: "Tanpri ouvri sesyon.", 
-        signIn: "Anrijistre", 
+        title: "Tanpri ouvri sesyon.",
+        signIn: "Anrijistre",
         name: "Nom et siyati",
         stationId: "id estasyon",
         facilityId: "id klinik",
@@ -120,7 +121,7 @@ i18n.use(languageDetector).init({
         id: "NIH",
         cancel: "Anulè",
         continue: "Kontinye"
-      }, 
+      },
       add: {
         addHeader: "Ajoute pasyan nan lis datant?",
         comments: "Kòmantè",
