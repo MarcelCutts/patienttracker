@@ -5,7 +5,9 @@ import {
   Divider,
   TextInput,
   Button,
-  HelperText
+  Text,
+  Subheading,
+  DefaultTheme
 } from "react-native-paper";
 import { LanguageSelector } from "../components/LanguageSelector";
 import { connect } from "react-redux";
@@ -18,17 +20,22 @@ export const SettingsComponent = ({
   isFetching,
   upload,
   updateServer,
+  completedPatients,
   t
-}) =>
-  console.log("🚒", isFetching) || (
-    <View style={styles.container}>
-      <View>
-        <Title>{t("settings:language")}</Title>
-        <LanguageSelector />
-      </View>
-      <Divider style={{ margin: 24 }} />
-      <KeyboardAvoidingView behavior="padding" enabled>
-        <Title>{t("settings:details")} // Patients to upload</Title>
+}) => (
+  <View style={styles.container}>
+    <View>
+      <Title>{t("settings:language")}</Title>
+      <LanguageSelector />
+    </View>
+    <Divider style={styles.divider} />
+    <KeyboardAvoidingView behavior="padding" enabled>
+      <Title>{t("settings:details")}</Title>
+      <Subheading>
+        {completedPatients.length} completed patients ready to upload
+      </Subheading>
+
+      <View style={styles.upload}>
         <TextInput
           mode="outlined"
           style={styles.input}
@@ -47,25 +54,34 @@ export const SettingsComponent = ({
 
         {isFetching ? (
           <Button icon="schedule" mode="contained" disabled={true}>
-            Uplading...
+            Uploading...
           </Button>
         ) : (
-          <Button icon="save" mode="contained" onPress={upload}>
-            {t("settings:update")}
+          <Button
+            icon="save"
+            mode="contained"
+            onPress={upload}
+            disabled={completedPatients.length === 0}
+          >
+            {t("settings:upload")}
           </Button>
         )}
 
-        <HelperText type="error" visible={error}>
-          Errorrr!
-        </HelperText>
-      </KeyboardAvoidingView>
-    </View>
-  );
+        {error ? (
+          <Text type="error" style={styles.errorMessage}>
+            {error}
+          </Text>
+        ) : null}
+      </View>
+    </KeyboardAvoidingView>
+  </View>
+);
 
 const mapStateToProps = state => ({
   server: state.server,
   isFetching: state.patients.isFetching,
-  error: state.patients.error
+  error: state.patients.error,
+  completedPatients: state.patients.queue.filter(p => p.timeFinished)
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -80,11 +96,21 @@ export const SettingsScreen = withNamespaces(["settings"], { wait: true })(
   )(SettingsComponent)
 );
 
+// TODO: Change theme usage to be from provider
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
     padding: 24
+  },
+  divider: {
+    margin: 24
+  },
+  upload: {
+    marginTop: 16
+  },
+  errorMessage: {
+    color: DefaultTheme.colors.error
   },
   input: {
     marginBottom: 16,
