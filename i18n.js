@@ -202,9 +202,6 @@ i18n.use(languageDetector).init({
   // have a common namespace used around the full app
   ns: ["common"],
   defaultNS: "common",
-
-  debug: true,
-
   interpolation: {
     escapeValue: false // not needed for react as it does escape per default to prevent xss!
   }
