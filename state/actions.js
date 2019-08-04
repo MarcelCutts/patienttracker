@@ -40,7 +40,6 @@ export const uploadPatients = () => {
   return (dispatch, getState) => {
     const { patients, server } = getState();
     const completedPatients = patients.queue.filter(p => p.timeFinished);
-    console.log("🚨", server);
     dispatch(sendPatientsRequest());
     fetch(server.address, {
       method: "POST",
@@ -51,7 +50,6 @@ export const uploadPatients = () => {
       body: JSON.stringify(completedPatients)
     })
       .then(response => {
-        console.log("🏂", response);
         switch (response.status) {
           case 200:
             return dispatch(sendPatientsSuccess(completedPatients));
