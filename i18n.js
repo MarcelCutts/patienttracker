@@ -58,7 +58,7 @@ i18n.use(languageDetector).init({
         incorrectPassword: "Incorrect password",
         couldNotFind: "Could not find server at that address",
         genericError:
-          "An error occured. Ensure you are connected to the internet and check above details"
+          "An error occurred. Ensure you are connected to the internet and check above details"
       },
       qr: {
         add: "Add manually",
@@ -90,7 +90,7 @@ i18n.use(languageDetector).init({
         name: "Non",
         stationId: "Non seksyon",
         facilityId: "Seksyon pou ede",
-        error: "Tanpri antre tout detay yo."
+        error: "Tanpri antre tout detay yo"
       },
       home: {
         title: "Chèche pasyan",
@@ -101,7 +101,7 @@ i18n.use(languageDetector).init({
         patients: "Pasyan",
         inQueue: "annatant,",
         completed: "fini",
-        startedAt: "Te Komanse le",
+        startedAt: "Te Komanse nan",
         edit: "Chanje"
       },
       edit: {
@@ -115,7 +115,14 @@ i18n.use(languageDetector).init({
         details: "Detay sèvè",
         address: "Adrès",
         password: "Kòd sekrè",
-        update: "Aktyalize"
+        update: "Aktyalize",
+        patientsCompleted: "Kantite pasyan ki pare pou telechaje",
+        upload: "Telechaje",
+        uploading: "Telechajman",
+        incorrectPassword: "Kòd la pa kòrèk",
+        couldNotFind: "Pa ka jwenn sèvè a nan adrès sa a",
+        genericError:
+          "Yon erè te fèt. Asire ou ke ou konekte nan entènèt epi tcheke detay yo ki pi wo a"
       },
       qr: {
         add: "Rantre ak men",
@@ -142,12 +149,12 @@ i18n.use(languageDetector).init({
     },
     fr: {
       signIn: {
-        title: "Connecter s’il vous plait.",
+        title: "Connectez-vous",
         signIn: "Se connecter",
         name: "Nom",
         stationId: "Nom du poste",
         facilityId: "Bureau d’assistance",
-        error: "Veuillez-vous entrer tous les détails, s'il vous plait."
+        error: "Entrer toutes les informations"
       },
       home: {
         title: "Localiser le patient",
@@ -172,7 +179,14 @@ i18n.use(languageDetector).init({
         details: "Détails du serveur",
         address: "Adresse",
         password: "Mot de passe",
-        update: "Actualiser"
+        update: "Actualiser",
+        patientsCompleted: "de patients terminés prêts à être téléchargés",
+        upload: "Télécharger",
+        uploading: "Téléchargement",
+        incorrectPassword: "Mot de passe incorrect",
+        couldNotFind: "Impossible de trouver le serveur à cette adresse",
+        genericError:
+          "Une erreur est survenue. Assurez-vous d'être connecté à Internet et vérifiez les détails ci-dessus"
       },
       qr: {
         add: "Compléter manuellement",
