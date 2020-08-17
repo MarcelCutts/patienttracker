@@ -7,7 +7,7 @@ import {
   Button,
   Text,
   Subheading,
-  DefaultTheme
+  DefaultTheme,
 } from "react-native-paper";
 import { LanguageSelector } from "../components/LanguageSelector";
 import { connect } from "react-redux";
@@ -21,7 +21,7 @@ export const SettingsComponent = ({
   upload,
   updateServer,
   completedPatients,
-  t
+  t,
 }) => (
   <View style={styles.container}>
     <View>
@@ -41,7 +41,7 @@ export const SettingsComponent = ({
           style={styles.input}
           label={t("settings:address")}
           value={server.address}
-          onChangeText={text => updateServer({ ...server, address: text })}
+          onChangeText={(text) => updateServer({ ...server, address: text })}
         />
 
         <TextInput
@@ -49,7 +49,7 @@ export const SettingsComponent = ({
           style={styles.input}
           label={t("settings:password")}
           value={server.password}
-          onChangeText={text => updateServer({ ...server, password: text })}
+          onChangeText={(text) => updateServer({ ...server, password: text })}
         />
 
         {isFetching ? (
@@ -67,6 +67,15 @@ export const SettingsComponent = ({
           </Button>
         )}
 
+        <Button
+          icon="save"
+          mode="contained"
+          onPress={upload}
+          disabled={completedPatients.length === 0}
+        >
+          {t("settings:upload")}
+        </Button>
+
         {error ? (
           <Text type="error" style={styles.errorMessage}>
             {t(error)}
@@ -77,23 +86,20 @@ export const SettingsComponent = ({
   </View>
 );
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   server: state.server,
   isFetching: state.patients.isFetching,
   error: state.patients.error,
-  completedPatients: state.patients.queue.filter(p => p.timeFinished)
+  completedPatients: state.patients.queue.filter((p) => p.timeFinished),
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   upload: () => dispatch(uploadPatients()),
-  updateServer: config => dispatch(updateServerConfiguration(config))
+  updateServer: (config) => dispatch(updateServerConfiguration(config)),
 });
 
 export const SettingsScreen = withNamespaces(["settings"], { wait: true })(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(SettingsComponent)
+  connect(mapStateToProps, mapDispatchToProps)(SettingsComponent)
 );
 
 // TODO: Change theme usage to be from provider
@@ -101,19 +107,19 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    padding: 24
+    padding: 24,
   },
   divider: {
-    margin: 24
+    margin: 24,
   },
   upload: {
-    marginTop: 16
+    marginTop: 16,
   },
   errorMessage: {
-    color: DefaultTheme.colors.error
+    color: DefaultTheme.colors.error,
   },
   input: {
     marginBottom: 16,
-    fontSize: 18
-  }
+    fontSize: 18,
+  },
 });

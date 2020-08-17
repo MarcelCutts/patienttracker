@@ -10,30 +10,33 @@ export const rootReducer = combineReducers({
       case "EDIT_PATIENT":
         return {
           ...state,
-          queue: state.queue.map(p => {
+          queue: state.queue.map((p) => {
             if (p.id !== action.payload.id) return p;
             return { ...p, ...action.payload };
-          })
+          }),
         };
       case "SEND_PATIENTS_REQUEST":
         return { ...state, isFetching: true, error: null };
       case "SEND_PATIENTS_SUCCESS": {
-        const uploadedIds = action.patients.map(p => p.id);
+        const uploadedIds = action.patients.map((p) => p.id);
         return {
           ...state,
-          queue: state.queue.filter(p => !uploadedIds.includes(p.id)),
-          isFetching: false
+          queue: state.queue.filter((p) => !uploadedIds.includes(p.id)),
+          isFetching: false,
         };
       }
       case "SEND_PATIENTS_ERROR": {
         return {
           ...state,
           isFetching: false,
-          error: action.error
+          error: action.error,
         };
       }
       default:
-        return state;
+        return {
+          ...state,
+          isFetching: false,
+        };
     }
   },
   user: (state = null, action) => {
@@ -49,7 +52,7 @@ export const rootReducer = combineReducers({
   server: (
     state = {
       address: "https://whispering-meadow-82942.herokuapp.com/patients",
-      password: "secret"
+      password: "secret",
     },
     action
   ) => {
@@ -59,5 +62,5 @@ export const rootReducer = combineReducers({
       default:
         return state;
     }
-  }
+  },
 });
