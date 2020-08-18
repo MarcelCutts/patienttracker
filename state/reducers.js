@@ -33,10 +33,7 @@ export const rootReducer = combineReducers({
         };
       }
       default:
-        return {
-          ...state,
-          isFetching: false,
-        };
+        return state;
     }
   },
   user: (state = null, action) => {

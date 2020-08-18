@@ -6,14 +6,14 @@ import {
   Headline,
   Divider,
   Button,
-  Portal
+  Portal,
 } from "react-native-paper";
 import { EditPatient } from "./EditPatient";
 import { withNamespaces } from "react-i18next";
 
 export class PatientListCoponent extends React.Component {
   state = {
-    selectedPatient: null
+    selectedPatient: null,
   };
 
   hideDialog = () => this.setState({ selectedPatient: null });
@@ -21,8 +21,9 @@ export class PatientListCoponent extends React.Component {
 
   render() {
     const { patients, editPatient, t } = this.props;
+    if (!patients || !patients.length) return null;
     const { selectedPatient } = this.state;
-    const inQueue = patients.filter(p => !p.timeFinished);
+    const inQueue = patients.filter((p) => !p.timeFinished);
     return (
       <View style={styles.container}>
         <View style={styles.header}>
@@ -34,7 +35,7 @@ export class PatientListCoponent extends React.Component {
         </View>
         <FlatList
           data={inQueue}
-          keyExtractor={item => item.id}
+          keyExtractor={(item) => item.id}
           renderItem={({ item }) => (
             <>
               <List.Item
@@ -80,10 +81,10 @@ export const PatientList = withNamespaces("home", { wait: true })(
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
   },
   header: {
-    marginLeft: 16
+    marginLeft: 16,
   },
-  button: { alignSelf: "center" }
+  button: { alignSelf: "center" },
 });

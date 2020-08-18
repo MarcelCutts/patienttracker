@@ -9,7 +9,7 @@ import { PatientList } from "../components/PatientList";
 
 class HomeScreen extends React.Component {
   static navigationOptions = {
-    header: props => <Header {...props} />
+    header: (props) => <Header {...props} />,
   };
 
   updateUser = async () => {
@@ -18,13 +18,14 @@ class HomeScreen extends React.Component {
   };
 
   render() {
-    const { navigation, user, patients, editPatient } = this.props;
+    const { navigation, user, patients, editPatient, oldPatients } = this.props;
     return (
       <View style={styles.container}>
         <View style={styles.user}>
           <UserCard user={user} updateUser={this.updateUser} />
         </View>
         <PatientList patients={patients} editPatient={editPatient} />
+        <PatientList patients={oldPatients} editPatient={editPatient} />
 
         <FAB
           style={styles.fab}
@@ -35,33 +36,31 @@ class HomeScreen extends React.Component {
     );
   }
 }
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   user: state.user,
-  patients: state.patients.queue
+  oldPatients: state.patients,
+  patients: state.patients.queue,
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   clearUser: () => dispatch(clearUser()),
-  editPatient: patient => dispatch(editPatient(patient))
+  editPatient: (patient) => dispatch(editPatient(patient)),
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(HomeScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff"
+    backgroundColor: "#fff",
   },
   user: {
-    margin: 16
+    margin: 16,
   },
   fab: {
     position: "absolute",
     margin: 24,
     right: 0,
-    bottom: 0
-  }
+    bottom: 0,
+  },
 });
