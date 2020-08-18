@@ -11,11 +11,8 @@
         "foregroundImage": "./assets/images/androidicon.png"
       }
     },
-    "platforms": [
-      "ios",
-      "android"
-    ],
-    "version": "1.0.0",
+    "platforms": ["ios", "android"],
+    "version": "2.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/androidicon.png",
     "splash": {
@@ -26,9 +23,7 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },
