@@ -3,7 +3,7 @@
     "name": "Patient Tracker",
     "slug": "patienttracker",
     "privacy": "public",
-    "sdkVersion": "34.0.0",
+    "sdkVersion": "35.0.0",
     "android": {
       "package": "com.gheskio.patienttracker",
       "adaptiveIcon": {
@@ -11,7 +11,10 @@
         "foregroundImage": "./assets/images/androidicon.png"
       }
     },
-    "platforms": ["ios", "android"],
+    "platforms": [
+      "ios",
+      "android"
+    ],
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/androidicon.png",
@@ -23,7 +26,9 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true
     },

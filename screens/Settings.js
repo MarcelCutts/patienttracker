@@ -70,10 +70,11 @@ export const SettingsComponent = ({
         <Button
           icon="save"
           mode="contained"
+          style={styles.specialUploadButton}
           onPress={upload}
           disabled={completedPatients.length === 0}
         >
-          {t("settings:upload")}
+          DEBUG upload (be patient!)
         </Button>
 
         {error ? (
@@ -114,6 +115,10 @@ const styles = StyleSheet.create({
   },
   upload: {
     marginTop: 16,
+  },
+  specialUploadButton: {
+    marginTop: 16,
+    marginBottom: 16,
   },
   errorMessage: {
     color: DefaultTheme.colors.error,
