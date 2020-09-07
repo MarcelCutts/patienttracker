@@ -47,7 +47,7 @@ export class PatientListCoponent extends React.Component {
                   <Button
                     style={styles.button}
                     mode="outlined"
-                    icon="edit"
+                    icon="account-edit"
                     onPress={() => this.setState({ selectedPatient: item })}
                   >
                     {t("home:edit")}
