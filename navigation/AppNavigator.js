@@ -1,8 +1,5 @@
-import {
-  createSwitchNavigator,
-  createStackNavigator,
-  createAppContainer
-} from "react-navigation";
+import { createSwitchNavigator, createAppContainer } from "react-navigation";
+import { createStackNavigator } from "react-navigation-stack";
 import { UserLoadingScreen } from "../screens/UserLoadingScreen";
 import { UserSignInStack } from "../screens/UserSignInScreen";
 import HomeScreen from "../screens/HomeScreen";
@@ -13,10 +10,10 @@ const HomeStack = createStackNavigator(
   {
     Home: HomeScreen,
     Qr: QrScreen,
-    Settings: SettingsScreen
+    Settings: SettingsScreen,
   },
   {
-    initialRouteName: "Home"
+    initialRouteName: "Home",
   }
 );
 
@@ -27,7 +24,7 @@ export default createAppContainer(
       // Read more at https://reactnavigation.org/docs/en/auth-flow.html
       Main: HomeStack,
       UserLoading: UserLoadingScreen,
-      UserSignIn: UserSignInStack
+      UserSignIn: UserSignInStack,
     },
     { initialRouteName: "UserLoading" }
   )
