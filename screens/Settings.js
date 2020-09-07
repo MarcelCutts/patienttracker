@@ -58,7 +58,7 @@ export const SettingsComponent = ({
           </Button>
         ) : (
           <Button
-            icon="save"
+            icon="upload"
             mode="contained"
             onPress={upload}
             disabled={completedPatients.length === 0}
@@ -68,7 +68,7 @@ export const SettingsComponent = ({
         )}
 
         <Button
-          icon="save"
+          icon="upload"
           mode="contained"
           style={styles.specialUploadButton}
           onPress={upload}

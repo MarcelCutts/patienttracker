@@ -16,7 +16,7 @@ const DisplayType = {
   AddPatient: "AddPatient",
   EditPatient: "EditPatient",
   ViewPatient: "ViewPatient",
-  ManualEntry: "ManualEntry"
+  ManualEntry: "ManualEntry",
 };
 
 class QrScreenComponent extends React.Component {
@@ -25,7 +25,7 @@ class QrScreenComponent extends React.Component {
     hasCameraPermission: null,
     token: null,
     patient: null,
-    display: DisplayType.Scanner
+    display: DisplayType.Scanner,
   };
 
   async componentDidMount() {
@@ -45,12 +45,12 @@ class QrScreenComponent extends React.Component {
 
   completeDialog = () => this.props.navigation.navigate("Home");
 
-  addPatient = addEvent => {
+  addPatient = (addEvent) => {
     const { addPatient, user, navigation } = this.props;
     addPatient({
       ...user,
       timeStarted: Date.now(),
-      ...addEvent
+      ...addEvent,
     });
 
     navigation.navigate("Home");
@@ -76,7 +76,7 @@ class QrScreenComponent extends React.Component {
         )}
         <FAB
           style={styles.fab}
-          icon="create"
+          icon="account-plus"
           label={t("qr:add")}
           onPress={this.handleEnterManually}
         />
@@ -116,7 +116,7 @@ class QrScreenComponent extends React.Component {
   }
 
   handlePatient = async ({ data }) => {
-    const patient = this.props.patients.find(p => p.id === data);
+    const patient = this.props.patients.find((p) => p.id === data);
     let display = DisplayType.AddPatient;
     if (patient) display = DisplayType.EditPatient;
     if (!!patient && !!patient.timeFinished) display = DisplayType.ViewPatient;
@@ -128,21 +128,18 @@ class QrScreenComponent extends React.Component {
     this.setState({ display: DisplayType.ManualEntry });
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   patients: state.patients.queue,
-  user: state.user
+  user: state.user,
 });
 
-const mapDispatchToProps = dispatch => ({
-  addPatient: patient => dispatch(addPatient(patient)),
-  editPatient: patient => dispatch(editPatient(patient))
+const mapDispatchToProps = (dispatch) => ({
+  addPatient: (patient) => dispatch(addPatient(patient)),
+  editPatient: (patient) => dispatch(editPatient(patient)),
 });
 
 export default withNamespaces(["qr"], { wait: true })(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(QrScreenComponent)
+  connect(mapStateToProps, mapDispatchToProps)(QrScreenComponent)
 );
 
 const styles = StyleSheet.create({
@@ -151,6 +148,6 @@ const styles = StyleSheet.create({
     position: "absolute",
     margin: 16,
     right: 0,
-    bottom: 0
-  }
+    bottom: 0,
+  },
 });

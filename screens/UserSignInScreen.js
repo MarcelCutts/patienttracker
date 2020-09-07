@@ -11,12 +11,12 @@ export class UserSignInScreen extends React.Component {
   state = {
     name: { value: "", error: false },
     stationId: { value: "", error: false },
-    facilityId: { value: "", error: false }
+    facilityId: { value: "", error: false },
   };
 
   static navigationOptions = ({ screenProps }) => ({
     title: screenProps.t("signIn:title"),
-    headerRight: <LanguageSelector />
+    headerRight: <LanguageSelector />,
   });
 
   updateField(text, fieldName) {
@@ -47,7 +47,7 @@ export class UserSignInScreen extends React.Component {
     this.props.setUser({
       staffName: name.value,
       stationId: stationId.value,
-      facilityId: facilityId.value
+      facilityId: facilityId.value,
     });
 
     this.props.navigation.navigate("Home");
@@ -62,7 +62,7 @@ export class UserSignInScreen extends React.Component {
           mode="outlined"
           style={styles.input}
           label={t("signIn:name")}
-          onChangeText={text => this.updateField(text, "name")}
+          onChangeText={(text) => this.updateField(text, "name")}
           error={this.state.name.error}
           value={this.state.name.value}
         />
@@ -71,7 +71,7 @@ export class UserSignInScreen extends React.Component {
           mode="outlined"
           style={styles.input}
           label={t("signIn:stationId")}
-          onChangeText={text => this.updateField(text, "stationId")}
+          onChangeText={(text) => this.updateField(text, "stationId")}
           value={this.state.stationId.value}
           error={this.state.stationId.error}
         />
@@ -80,7 +80,7 @@ export class UserSignInScreen extends React.Component {
           mode="outlined"
           style={styles.input}
           label={t("signIn:facilityId")}
-          onChangeText={text => this.updateField(text, "facilityId")}
+          onChangeText={(text) => this.updateField(text, "facilityId")}
           value={this.state.facilityId.value}
           error={this.state.facilityId.error}
         />
@@ -92,7 +92,7 @@ export class UserSignInScreen extends React.Component {
           {t("signIn:error")}
         </HelperText>
 
-        <Button icon="portrait" mode="contained" onPress={this.signIn}>
+        <Button icon="login" mode="contained" onPress={this.signIn}>
           {t("signIn:signIn")}
         </Button>
       </KeyboardAvoidingView>
@@ -100,17 +100,14 @@ export class UserSignInScreen extends React.Component {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  setUser: user => dispatch(setUser(user))
+const mapDispatchToProps = (dispatch) => ({
+  setUser: (user) => dispatch(setUser(user)),
 });
 
 export const UserSignInStack = createStackNavigator({
   UserSignIn: withNamespaces(["signIn"], { wait: true })(
-    connect(
-      null,
-      mapDispatchToProps
-    )(UserSignInScreen)
-  )
+    connect(null, mapDispatchToProps)(UserSignInScreen)
+  ),
 });
 
 const styles = StyleSheet.create({
@@ -118,11 +115,11 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   input: {
     width: "70%",
     marginBottom: 16,
-    fontSize: 18
-  }
+    fontSize: 18,
+  },
 });

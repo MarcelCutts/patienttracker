@@ -29,7 +29,7 @@ class HomeScreen extends React.Component {
 
         <FAB
           style={styles.fab}
-          icon="camera-alt"
+          icon="camera"
           onPress={() => navigation.navigate("Qr")}
         />
       </View>
