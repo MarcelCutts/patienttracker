@@ -10,23 +10,22 @@ import configureStore from "./state/configureStore";
 import { PersistGate } from "redux-persist/integration/react";
 import { Provider } from "react-redux";
 import { MaterialIcons } from "@expo/vector-icons";
+import { enableScreens } from "react-native-screens";
+enableScreens();
 
-const navigationPersistenceKey = __DEV__ ? "NavigationStateDEV" : null;
-const WrappedStack = ({ t }) => (
-  <AppNavigator persistenceKey={navigationPersistenceKey} screenProps={{ t }} />
-);
+const WrappedStack = ({ t }) => <AppNavigator screenProps={{ t }} />;
 
 const ReloadAppOnLanguageChange = withNamespaces("common", {
   bindI18n: "languageChanged",
   bindStore: false,
-  wait: true
+  wait: true,
 })(WrappedStack);
 
 const { store, persistor } = configureStore();
 
 export default class App extends React.Component {
   state = {
-    isLoadingComplete: false
+    isLoadingComplete: false,
   };
 
   render() {
@@ -59,11 +58,11 @@ export default class App extends React.Component {
   _loadResourcesAsync = async () =>
     await Promise.all([
       Font.loadAsync({
-        ...MaterialIcons.font
-      })
+        ...MaterialIcons.font,
+      }),
     ]);
 
-  _handleLoadingError = error => {
+  _handleLoadingError = (error) => {
     // In this case, you might want to report the error to your error
     // reporting service, for example Sentry
     console.warn(error); // eslint-disable-line
@@ -77,6 +76,6 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff"
-  }
+    backgroundColor: "#fff",
+  },
 });
