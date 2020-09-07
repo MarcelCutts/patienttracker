@@ -13,6 +13,7 @@ import { LanguageSelector } from "../components/LanguageSelector";
 import { connect } from "react-redux";
 import { uploadPatients, updateServerConfiguration } from "../state/actions";
 import { withNamespaces } from "react-i18next";
+import Constants from "expo-constants";
 
 export const SettingsComponent = ({
   server,
@@ -84,6 +85,7 @@ export const SettingsComponent = ({
         ) : null}
       </View>
     </KeyboardAvoidingView>
+    <Text> App version: {Constants.manifest.version} </Text>
   </View>
 );
 
