@@ -53,7 +53,7 @@ export const SettingsComponent = ({
         />
 
         {isFetching ? (
-          <Button icon="schedule" mode="contained" disabled={true}>
+          <Button icon="clock" mode="contained" disabled={true}>
             {t("settings:uploading")}
           </Button>
         ) : (

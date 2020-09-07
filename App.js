@@ -1,5 +1,6 @@
 import Bugsnag from "@bugsnag/expo";
 Bugsnag.start();
+const ErrorBoundary = Bugsnag.getPlugin("react").createErrorBoundary(React);
 
 import * as React from "react";
 import { Platform, StatusBar, StyleSheet, View } from "react-native";
@@ -46,10 +47,12 @@ export default class App extends React.Component {
           <PersistGate loading={null} persistor={persistor}>
             <I18nextProvider i18n={i18n}>
               <PaperProvider>
-                <View style={styles.container}>
-                  {Platform.OS === "ios" && <StatusBar barStyle="default" />}
-                  <ReloadAppOnLanguageChange />
-                </View>
+                <ErrorBoundary>
+                  <View style={styles.container}>
+                    {Platform.OS === "ios" && <StatusBar barStyle="default" />}
+                    <ReloadAppOnLanguageChange />
+                  </View>
+                </ErrorBoundary>
               </PaperProvider>
             </I18nextProvider>
           </PersistGate>
