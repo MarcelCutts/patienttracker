@@ -1,7 +1,7 @@
 import * as React from "react";
 import { StyleSheet, KeyboardAvoidingView } from "react-native";
 import { TextInput, Button, HelperText } from "react-native-paper";
-import { createStackNavigator } from "react-navigation";
+import { createStackNavigator } from "react-navigation-stack";
 import { withNamespaces } from "react-i18next";
 import { connect } from "react-redux";
 import { LanguageSelector } from "../components/LanguageSelector";
