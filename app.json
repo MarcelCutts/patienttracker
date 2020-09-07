@@ -11,10 +11,7 @@
       },
       "versionCode": 3
     },
-    "platforms": [
-      "ios",
-      "android"
-    ],
+    "platforms": ["ios", "android"],
     "version": "3.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/androidicon.png",
@@ -26,25 +23,10 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },
-    "description": "",
-    "extra": {
-      "bugsnag": {
-        "apiKey": "b0eac63eb92c8fe155df64d5d464a52d"
-      }
-    },
-    "hooks": {
-      "postPublish": [
-        {
-          "file": "@bugsnag/expo/hooks/post-publish.js",
-          "config": {}
-        }
-      ]
-    }
+    "description": ""
   }
 }

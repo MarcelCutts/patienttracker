@@ -1,6 +1,3 @@
-import Bugsnag from "@bugsnag/expo";
-Bugsnag.start();
-
 import * as React from "react";
 import { Platform, StatusBar, StyleSheet, View } from "react-native";
 import { AppLoading } from "expo";
